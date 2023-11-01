@@ -1,0 +1,51 @@
+{% extends 'account/base.html' %}
+{% load widget_tweaks %}
+
+{% load i18n %}
+
+{% block head_title %}
+  {% trans 'Signup' %}
+{% endblock %}
+
+{% block content %}
+  <h1 class="fw-bold">{% trans 'Sign Up' %}</h1>
+
+  <p>
+    {% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">sign in</a>.{% endblocktrans %}
+  </p>
+
+  <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
+    {% csrf_token %}
+
+    {{ form.non_field_errors|safe }}
+    <input type="hidden" name="remember" value="true" />
+    <div>
+      <div class="form-floating">
+        {{ form.username.errors|safe }}
+        {% render_field form.username placeholder="username" id="username" name="username" type="text" autocomplete="username" required=True class="form-control mb-2" %}
+        <label for="username" class="floatingInput">Nome Usuário</label>
+      </div>
+      <div class="form-floating">
+        {{ form.email.errors|safe }}
+        {% render_field form.email placeholder="email" id="email" name="email" type="email" autocomplete="email" required=True class="form-control mb-2" %}
+        <label for="id_email" class="floatingInput">Email</label>
+      </div>
+      <div class="form-floating">
+        {{ form.password1.errors|safe }}
+        {% render_field form.password1 placeholder="password1" id="id_password1" name="password1" type="password" autocomplete="password1" required=True class="form-control mb-2" %}
+        <label for="id_password1" class="floatingInput">Senha</label>
+      </div>
+      <div class="form-floating">
+        {{ form.password2.errors|safe }}
+        {% render_field form.password2 placeholder="password2" id="id_password2" name="password2" type="password" autocomplete="password2" required=True class="form-control" %}
+        <label for="id_password2" class="floatingInput">Confirma senha</label>
+      </div>
+    </div>
+
+
+    {% if redirect_field_value %}
+      <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+    {% endif %}
+    <button type="submit" class="btn btn-success w-100 mt-4">{% trans 'Sign Up' %}</button>
+  </form>
+{% endblock %}
