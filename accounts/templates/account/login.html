@@ -1,22 +1,21 @@
 {% extends 'account/base.html' %}
 {% load widget_tweaks %}
 
-{% load i18n %}
-{% load account socialaccount %}
-
 {% block head_title %}
-  Login
+Log-in
 {% endblock %}
 
 {% block content %}
-  <h2 class="fw-bold mb-5">Entrar no Sistema</h2>
+<h2 class="fw-bold mb-5">Entrar no Sistema</h2>
 
-  {% get_providers as socialaccount_providers %}
-
+{% if user.is_authenticated %}
+  {% include "account/snippets/already_logged_in.html" %}
+{% else %}
   <form class="login" method="POST" action="{% url 'account_login' %}">
     {% csrf_token %}
 
-{#    {{form.as_p}} #}
+    {# {{form.as_p}} #}
+
     {{ form.non_field_errors|safe }}
     <input type="hidden" name="remember" value="true" />
     <div class="form-floating">
@@ -34,11 +33,13 @@
       <p style="font-size: 14px;" class="mb-0">
         Não tem conta?
 
-        <a href="{% url 'account_signup' %}" class="fw-bold">Cadastre-se</a>
+        <a href="{% url 'account_signup' %}" class="fw-bold links">Cadastre-se</a>
       </p>
 
-      <a class="button secondaryAction fw-bold mb-2" href="{% url 'account_reset_password' %}" style="font-size: 14px;">{% trans 'Forgot Password?' %}</a>
+      <a class="button secondaryAction fw-bold mb-2 links" href="{% url 'account_reset_password' %}"
+        style="font-size: 14px;">Esqueceu a Senha?</a>
     </div>
     <button class="primaryAction btn btn-success w-100" type="submit">Entrar</button>
   </form>
+{% endif %}
 {% endblock %}

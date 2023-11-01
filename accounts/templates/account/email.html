@@ -1,13 +1,11 @@
 {% extends "account/base.html" %}
 
-{% load i18n %}
-
-{% block head_title %}{% trans "Email Addresses" %}{% endblock %}
+{% block head_title %}Endereços de Email{% endblock %}
 
 {% block content %}
-    <h1>{% trans "Email Addresses" %}</h1>
+    <h1>Endereços de Email</h1>
 {% if emailaddresses %}
-<p>{% trans 'The following email addresses are associated with your account:' %}</p>
+<p>Os seguintes endereços de email estão associados à sua conta:</p>
 
 <form action="{% url 'account_email' %}" class="email_list" method="post">
 {% csrf_token %}
@@ -21,19 +19,19 @@
 
 {{ emailaddress.email }}
     {% if emailaddress.verified %}
-    <span class="verified">{% trans "Verified" %}</span>
+    <span class="verified">Verificado</span>
     {% else %}
-    <span class="unverified">{% trans "Unverified" %}</span>
+    <span class="unverified">Não verificado</span>
     {% endif %}
-      {% if emailaddress.primary %}<span class="primary">{% trans "Primary" %}</span>{% endif %}
+      {% if emailaddress.primary %}<span class="primary">Principal</span>{% endif %}
 </label>
 </div>
   {% endfor %}
 
 <div class="buttonHolder">
-      <button class="secondaryAction" type="submit" name="action_primary" >{% trans 'Make Primary' %}</button>
-      <button class="secondaryAction" type="submit" name="action_send" >{% trans 'Re-send Verification' %}</button>
-      <button class="primaryAction" type="submit" name="action_remove" >{% trans 'Remove' %}</button>
+      <button class="secondaryAction" type="submit" name="action_primary" >Tornar Principal</button>
+      <button class="secondaryAction" type="submit" name="action_send" >Reenviar Verificação</button>
+      <button class="primaryAction" type="submit" name="action_remove" >Remover</button>
 </div>
 
 </fieldset>
@@ -44,12 +42,12 @@
 {% endif %}
 
   {% if can_add_email %}
-    <h2>{% trans "Add Email Address" %}</h2>
+    <h2>Adicionar Endereço de Email</h2>
 
     <form method="post" action="{% url 'account_email' %}" class="add_email">
         {% csrf_token %}
         {{ form.as_p }}
-        <button name="action_add" type="submit">{% trans "Add Email" %}</button>
+        <button name="action_add" type="submit">Adicionar E-mail</button>
     </form>
   {% endif %}
 
@@ -59,7 +57,7 @@
 {% block extra_body %}
 <script type="text/javascript">
 (function() {
-  var message = "{% trans 'Do you really want to remove the selected email address?' %}";
+  var message = "Você realmente deseja remover o endereço de email selecionado?";
   var actions = document.getElementsByName('action_remove');
   if (actions.length) {
     actions[0].addEventListener("click", function(e) {

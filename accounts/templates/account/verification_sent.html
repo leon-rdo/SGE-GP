@@ -1,12 +1,10 @@
 {% extends "account/base.html" %}
 
-{% load i18n %}
-
-{% block head_title %}{% trans "Verify Your Email Address" %}{% endblock %}
+{% block head_title %}Verifique Seu Endereço de Email{% endblock %}
 
 {% block content %}
-    <h1>{% trans "Verify Your Email Address" %}</h1>
+<h1>Verifique Seu Endereço de Email</h1>
 
-    <p>{% blocktrans %}We have sent an email to you for verification. Follow the link provided to finalize the signup process. If you do not see the verification email in your main inbox, check your spam folder. Please contact us if you do not receive the verification email within a few minutes.{% endblocktrans %}</p>
+<p>Enviamos um email para você para verificação. Siga o link fornecido para finalizar o processo de inscrição. Se você não vê o e-mail de verificação na sua caixa de entrada principal, verifique sua pasta de spam. Por favor, entre em contato conosco se você não receber o email de verificação dentro de alguns minutos.</p>
 
 {% endblock %}

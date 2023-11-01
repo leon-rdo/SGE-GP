@@ -19,7 +19,7 @@
 
     {% endblock %}
   </head>
-  <body class="container-fluid p-0 overflow-hidden" style="height: 100vh;">
+  <body class="container-fluid p-0 overflow-hidden">
     {% for message in messages %}
       <div class="alert bg-warning alert-dismissible fade show border-0 rounded-0 m-0" role="alert">
         <strong>Mensagem:</strong> {{ message }}
@@ -29,7 +29,7 @@
       <!-- No messages -->
     {% endfor %}
     <div class="row justify-content-center align-items-center h-100 g-2">
-      <div class="col-md-7 d-none d-md-block p-3 d-none d-md-flex flex-column justify-content-around h-100" style="background: linear-gradient(136deg, #00b664 0%, #00C86F 100%);">
+      <div class="col-md-7 accounts-sidebanner d-none d-md-block p-3 d-none d-md-flex flex-column justify-content-around h-100">
         <div class="text-center">
           <h1 class="display-1 text-white">SGE-GP</h1>
           <p class="display-5 text-white">Sistema de Gestão Educacional do Centro de Estudos Geraldo Palmeira</p>

@@ -1,35 +1,23 @@
 {% extends "account/base.html" %}
-
-{% load i18n %}
-{% load account %}
-
-{% block head_title %}{% trans "Confirm Email Address" %}{% endblock %}
-
+{% block head_title %}Confirmar E-mail{% endblock %}
 
 {% block content %}
-<h1>{% trans "Confirm Email Address" %}</h1>
+<h1>Confirmar E-mail</h1>
 
 {% if confirmation %}
-
-{% user_display confirmation.email_address.user as user_display %}
-
-{% if can_confirm %}
-<p>{% blocktrans with confirmation.email_address.email as email %}Please confirm that <a href="mailto:{{ email }}">{{ email }}</a> is an email address for user {{ user_display }}.{% endblocktrans %}</p>
-
-<form method="post" action="{% url 'account_confirm_email' confirmation.key %}">
-{% csrf_token %}
-    <button type="submit">{% trans 'Confirm' %}</button>
-</form>
+    {% user_display confirmation.email_address.user as user_display %}
+    {% if can_confirm %}
+        <p>Por favor, confirme que <a href="mailto:{{ confirmation.email_address.email }}">{{ confirmation.email_address.email }}</a> é um endereço de email para o usuário {{ user_display }}.</p>
+        <form method="post" action="{% url 'account_confirm_email' confirmation.key %}">
+            {% csrf_token %}
+            <button type="submit">Confirmar</button>
+        </form>
+    {% else %}
+        <p>Não foi possível confirmar {{ confirmation.email_address.email }} porque já está confirmado por uma conta diferente.
+        </p>
+    {% endif %}
 {% else %}
-<p>{% blocktrans %}Unable to confirm {{ email }} because it is already confirmed by a different account.{% endblocktrans %}</p>
+    {% url 'account_email' as email_url %}
+    <p>Este link de confirmação de email expirou ou é inválido. Por favor, <a href="{{ email_url }}">solicite uma nova confirmação de email</a>.</p>
 {% endif %}
-
-{% else %}
-
-{% url 'account_email' as email_url %}
-
-<p>{% blocktrans %}This email confirmation link expired or is invalid. Please <a href="{{ email_url }}">issue a new email confirmation request</a>.{% endblocktrans %}</p>
-
-{% endif %}
-
 {% endblock %}

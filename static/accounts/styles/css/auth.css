@@ -1,0 +1,16 @@
+body {
+    height: 100vh;
+}
+
+.accounts-sidebanner {
+    background: linear-gradient(136deg, #00b664 0%, #00C86F 100%);
+}
+
+.links {
+    color: #00C86F;
+}
+
+.btn-success {
+    background-color: #00C86F;
+    border: 0;
+}
