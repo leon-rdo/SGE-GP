@@ -1,7 +1,34 @@
 body {
     min-height: 100vh;
+    background-color: #FFF7E0;
 }
 
 main {
     flex: 1;
+}
+
+.navbar{
+    background-color: #007B23;
+}
+
+.botao1{
+    background-color: #43C668;
+}
+
+.botao2{
+    background-color: #43C668;
+}
+
+.botao3{
+    background-color: #007B23;
+}
+
+#botaoLogin{
+    background-color: white;
+    color: #007B23;
+}
+
+#botaoCadastro{
+    background-color: #00FF48;
+    color: #024214;
 }
