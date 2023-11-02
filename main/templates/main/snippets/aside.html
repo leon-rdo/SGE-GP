@@ -2,7 +2,7 @@
     <h3 class="fs-1 fw-bold text-center text-success">Ações</h3>
     <hr>
     <div class="d-flex flex-column">
-        <a href="#" class="btn btn-success btn-lg mb-2">Meu Perfil</a>
+        <a href="{% url 'main:meu-perfil' %}" class="btn btn-success btn-lg mb-2">Meu Perfil</a>
         {% if user.type == 'guardian' or user.type == 'student' %}
         <a href="#" class="btn btn-success btn-lg mb-2">Disciplinas</a>
         <a href="#" class="btn btn-success btn-lg mb-2">Eventos</a>
