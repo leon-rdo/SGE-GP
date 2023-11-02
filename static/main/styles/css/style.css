@@ -7,16 +7,17 @@ main {
     flex: 1;
 }
 
-.navbar {
+.bg-green {
     background-color: #007B23;
 }
 
-.btn-green {
-    background-color: #007B23;
+.bg-light-green {
+    background-color: #7CDC7D;
 }
 
-.btn-light-green {
-    background-color: #43C668;
+.bg-dark-green {
+    background-color: #105f26;
+    color: white;
 }
 
 .text-green {
@@ -28,11 +29,13 @@ main {
 }
 
 .text-light-green {
-    color: #43C668;
+    color: #7CDC7D;
 }
 
-.btn-navbar {
-    width: 8rem;
+@media (min-width: 768px) {
+    .btn-navbar {
+        width: 8rem;
+    }
 }
 
 .navbar-brand img {
@@ -40,8 +43,21 @@ main {
 }
 
 .btn:hover {
-    background-color: #43C668;
-    color: #FFF;
+    background-color: #FFF7E0;
+    color: #105f26;
     border: 0;
     transform: scale(0.98);
+}
+
+.btn-action {
+    height: 4rem;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
+/* Disciplinas */
+
+.card-subject a {
+    font-size: 0.7rem; aspect-ratio: 1/1;
 }
