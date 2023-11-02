@@ -45,3 +45,10 @@ main {
     border: 0;
     transform: scale(0.98);
 }
+
+.descricao{
+    background-image: url('/static/main/img/formapera.svg'); 
+    background-size: 100%; 
+    background-repeat: no-repeat;
+    height: max-content;
+}
