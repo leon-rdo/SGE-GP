@@ -13,13 +13,18 @@
     <header>
         <nav class="navbar mb-3">
             <div class="container justify-content-between">
-                <a class="navbar-brand" href="#">
-                    <img src="https://getbootstrap.com/docs/5.3/assets/brand/bootstrap-logo.svg" alt="Bootstrap" width="30" height="24">
-                    Bootstrap
+                <a class="navbar-brand text-white fs-3">
+                  <img class="me-2" src="{% static 'main/icons/CEGP.svg' %}" alt="Logo do Colégio Geraldo Palemeira">
+                  SGE-GP  
                 </a>
-                {% block nav_details %}
-                
-                {% endblock %}
+                {% if not user.is_authenticated %}
+                  <div>
+                    <a class="btn btn-light fw-bold text-green btn-navbar rounded-pill me-3" id="botaoLogin" href="{% url 'account_login' %}" role="button">Entrar</a>
+                    <a class="btn btn-light-green fw-bold text-dark-green btn-navbar rounded-pill" id="botaoCadastro" href="{% url 'account_signup' %}" role="button">Cadastre-se</a>
+                  </div>
+                {% else %}
+                  <a class="btn btn-danger btn-navbar rounded-pill" href="{% url 'account_logout' %}" role="button">Sair</a>
+                {% endif %}
             </div>
           </nav>
     </header>
@@ -43,10 +48,7 @@
     <footer>
         <nav class="navbar bg-dark" data-bs-theme="dark">
             <div class="container-fluid justify-content-center">
-              <a class="navbar-brand" href="#">
-                <img src="https://getbootstrap.com/docs/5.3/assets/brand/bootstrap-logo.svg" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
-                Bootstrap
-              </a>
+                <img src="{% static 'main/icons/CEGP.svg' %}" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
             </div>
           </nav>
     </footer>

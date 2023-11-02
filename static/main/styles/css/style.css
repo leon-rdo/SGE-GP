@@ -7,28 +7,41 @@ main {
     flex: 1;
 }
 
-.navbar{
+.navbar {
     background-color: #007B23;
 }
 
-.botao1{
-    background-color: #43C668;
-}
-
-.botao2{
-    background-color: #43C668;
-}
-
-.botao3{
+.btn-green {
     background-color: #007B23;
 }
 
-#botaoLogin{
-    background-color: white;
+.btn-light-green {
+    background-color: #43C668;
+}
+
+.text-green {
     color: #007B23;
 }
 
-#botaoCadastro{
-    background-color: #00FF48;
-    color: #024214;
+.text-dark-green {
+    color: #105f26;
+}
+
+.text-light-green {
+    color: #43C668;
+}
+
+.btn-navbar {
+    width: 8rem;
+}
+
+.navbar-brand img {
+    width: 60px;
+}
+
+.btn:hover {
+    background-color: #43C668;
+    color: #FFF;
+    border: 0;
+    transform: scale(0.98);
 }
