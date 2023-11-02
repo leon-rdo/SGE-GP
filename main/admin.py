@@ -1,4 +1,6 @@
 from django.contrib import admin
-from .models import Disciplina
+from .models import *
 
-admin.site.register(Disciplina)
+admin.site.register(Subject)
+admin.site.register(Class)
+admin.site.register(Ativity)
