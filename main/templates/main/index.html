@@ -1,11 +1,19 @@
 {% extends "base.html" %}
 {% load static%}
 
-{% block title %}Conheça o SGE-GP{% endblock title %}
 
+{% block title %}Conheça o SGE-GP{% endblock title %}
+{% block head %}
+<style>
+    body{
+    background-image: url('/static/main/img/s.png'); 
+    background-size: contain; 
+    background-position: right;
+    background-repeat: no-repeat;
+}
+</style>
+{% endblock head %}
 {% block content %}
-<div class="container conteudo">
-<div class="row">
     <div class="col-6 d-flex align-items-center justify-content-center">
         <div class="esquerda">
             <h1>Conheça o nosso sistema!</h1><br>
@@ -19,7 +27,4 @@
                     <img src="{%static 'main/img/estudante-com-computador-que-estuda-na-escola-33080012.jpg'%}" alt="Estudantes"></div>
                 </div>
         </div>
-    
-</div>
-</div>
 {% endblock content %}
