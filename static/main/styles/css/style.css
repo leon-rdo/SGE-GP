@@ -1,10 +1,6 @@
 body {
     min-height: 100vh;
     background-color: #FFF7E0;
-    background-image: url('/static/main/img/s.png'); 
-    background-size: contain; 
-    background-position: right;
-    background-repeat: no-repeat;
 }
 
 main {
@@ -52,16 +48,18 @@ main {
     border: 0;
     transform: scale(0.98);
 }
+.conteudo{
+    background-image: url('/static/main/img/s.png'); 
+    background-size: contain; 
+    background-position: right;
+    background-repeat: no-repeat;
+}
 
 .esquerda{
     background-image: url('/static/main/img/formapera.svg'); 
     background-size: 100%; 
     background-repeat: no-repeat;
     height: max-content;
-}
-
-.direita{
-    
 }
 
 .circulo {
