@@ -25,7 +25,7 @@ main {
 }
 
 .text-dark-green {
-    color: #105f26;
+    color: #21561A;
 }
 
 .text-light-green {
@@ -52,7 +52,7 @@ main {
 
 .esquerda{
     background-image: url('/static/main/img/formapera.svg'); 
-    background-size: 100%; 
+    background-size: cover; 
     background-repeat: no-repeat;
     height: max-content;
 }
