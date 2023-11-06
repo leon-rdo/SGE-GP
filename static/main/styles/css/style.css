@@ -54,14 +54,16 @@ main {
     background-image: url('/static/main/img/formapera.svg'); 
     background-size: cover; 
     background-repeat: no-repeat;
-    height: max-content;
+    height: 80%;
 }
 
 .circulo {
-    width: 500px;
-    height: 500px;
+    width: 600px;
+    height: 600px;
     border-radius: 50%;
     overflow: hidden;
+    margin-bottom: 50px;
+    margin-left: 200px;
   }
   
   .circulo img {

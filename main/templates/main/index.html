@@ -5,24 +5,27 @@
 {% block title %}Conheça o SGE-GP{% endblock title %}
 {% block head %}
 <style>
-  body {
+  .conteudo {
     background-image: url('/static/main/img/s.png');
     background-size: contain;
     background-position: right;
     background-repeat: no-repeat;
+    padding: 50px;
+    padding-bottom: 100px;
+    height: 800px;
   }
 </style>
 {% endblock head %}
 {% block container %}
 <main>
-  <div class="container mb-5">
-    <div class="row justify-content-center g-4">
+  <div class="conteudo container-fluid">
+    <div class="row justify-content-center g-3">
       <div class="col-6 d-flex align-items-center justify-content-center">
-        <div class="esquerda">
-          <h1 class="text-dark-green" style="font-family: Candal;filter:drop-shadow(6px 8px #FFF7E0);">Conheça o nosso sistema!</h1><br><br><br>
-          <p class="fw-bold fs-3">O Sistema de Gestão Educacional do Geraldo Palmeira possibilita a conexão dos alunos com a instituição!</p>
+        <div class="esquerda"><br><br><br><br>
+          <h1 class="text-dark-green" style="font-family: Candal;filter:drop-shadow(6px 8px #FFF7E0);">Conheça o nosso sistema!</h1><br><br><br><br><br>
+          <p class="fw-bold fs-2">O Sistema de Gestão Educacional do Geraldo Palmeira possibilita a conexão dos alunos com a instituição!</p>
           <br>
-          <p class="fw-bold fs-3 text-end">Acompanhe seu desempenho escolar e suas atividades.</p><br>
+          <p class="fw-bold fs-2 text-center">Acompanhe seu desempenho escolar e suas atividades.</p><br><br><br><br><br><br><br><br><br><br>
         </div>
       </div>
       <div class="col-6 d-flex align-items-center justify-content-center">
@@ -35,9 +38,9 @@
       </div>
     </div>
   </div>
-  <div class="container-fluid bg-dark-green mt-5 py-5">
+  <div class="container-fluid bg-dark-green pb-5">
     <div class="row justify-content-end">
-      <p class="text-end fs-1 py-5" style="font-family: Candal;filter:drop-shadow(6px 8px black);">O que você pode fazer aqui?</p>
+      <p class="text-center fs-1 py-5" style="font-family: Candal;filter:drop-shadow(6px 8px black);">O que você pode fazer aqui?</p>
     </div>
     <div class="row row-cols-2 row-cols-md-4 g-2">
       <div class="col d-flex justify-content-center">
