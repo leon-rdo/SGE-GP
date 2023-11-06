@@ -5,7 +5,7 @@ from .models import *
 admin.site.site_header = "Sistema de Gestão Educacional"
 admin.site.site_title = "Administração"
 admin.site.index_title = "SGE-GP"
-admin.site.__doc__ = "Sistema de Gestão Educacional - Gestão de Professores"
+admin.site.site_url = "/disciplinas"
 
 
 @admin.register(Subject)
