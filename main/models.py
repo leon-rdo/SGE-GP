@@ -3,12 +3,12 @@ from django.db import models
 
 class Subject(models.Model):
     name = models.CharField("Nome", max_length=50)
-    syllabus = models.TextField("Ementa")
+    syllabus = models.TextField("Ementa", blank=True, null=True)
     class_code = models.ForeignKey(
         "Class", on_delete=models.CASCADE, verbose_name="Turma"
     )
     academic_probation = models.ManyToManyField(
-        "accounts.User", related_name="academic_probation", verbose_name="Dependência"
+        "accounts.User", related_name="academic_probation", verbose_name="Dependência", blank=True, null=True
     )
 
     def __str__(self):
@@ -39,9 +39,9 @@ class Class(models.Model):
     )
 
     code = models.CharField("Código", max_length=10)
-    level = models.CharField("Nível", max_length=50)
+    level = models.CharField("Nível", max_length=50, choices=LEVELS)
     enrolled = models.ManyToManyField(
-        "accounts.User", related_name="matriculados", verbose_name="Matriculados"
+        "accounts.User", related_name="matriculados", verbose_name="Matriculados", blank=True, null=True
     )
     academic_year = models.IntegerField("Ano Letivo")
 
@@ -135,6 +135,7 @@ class Activity(models.Model):
     subject = models.ForeignKey(
         Subject, on_delete=models.CASCADE, verbose_name="Disciplina"
     )
+    image = models.ImageField('Imagem', upload_to='main/activities', blank=True, null=True)
     creation_date = models.DateField("Data de criação", auto_now_add=True)
     delivery_date = models.DateField("Data de entrega")
 
@@ -147,11 +148,12 @@ class Activity(models.Model):
 
 
 class Event(models.Model):
+    image = models.ImageField('Imagem', upload_to='main/events', blank=True, null=True)
     title = models.CharField("Título", max_length=50)
     description = models.TextField("Descrição")
     date_time = models.DateTimeField("Data e Hora")
     enrolled = models.ManyToManyField(
-        "accounts.User", related_name="participants", verbose_name="Participantes"
+        "accounts.User", related_name="participants", verbose_name="Participantes", blank=True, null=True
     )
 
     class Meta:
