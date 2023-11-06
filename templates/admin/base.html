@@ -1,0 +1,34 @@
+{% extends 'admin/base.html' %}
+
+{% block extrastyle %}{{ block.super }}
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
+
+    #branding h1 a:link,
+    #content:first-child h1 {
+        font-weight: bold;
+        font-family: 'Ubuntu', sans-serif;
+    }
+
+    #branding h1 a:hover {
+        color: yellow;
+        text-decoration: underline;
+    }
+
+    #content:first-child h1 {
+        font-weight: normal;
+    }
+
+    a:hover {
+        color: #18d922;
+    }
+
+    :root {
+        --primary: #225424;
+        --secondary: #27752a;
+        --link-fg: white;
+        --accent: white;
+        --link-selected-fg: #18d922;
+    }
+</style>
+{% endblock %}
