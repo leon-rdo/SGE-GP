@@ -2,13 +2,13 @@
     <h3 class="fs-1 fw-bold text-center text-dark-green">Ações</h3>
     <hr>
     <div class="d-flex flex-column">
-        <a href="{% url 'main:meu-perfil' %}" class="btn btn-action fw-bold bg-dark-green btn-lg mb-2">Meu Perfil</a>
+        <a href="{% url 'main:my-profile' %}" class="btn btn-action fw-bold bg-dark-green btn-lg mb-2">Meu Perfil</a>
         {% if user.type == 'guardian' or user.type == 'student' %}
-        <a href="{% url 'main:disciplinas' %}" class="btn btn-action fw-bold bg-dark-green btn-lg mb-2">Disciplinas</a>
+        <a href="{% url 'main:subjects' %}" class="btn btn-action fw-bold bg-dark-green btn-lg mb-2">Disciplinas</a>
         <a href="#" class="btn btn-action fw-bold bg-dark-green btn-lg mb-2">Eventos</a>
         <a href="#" class="btn btn-action fw-bold bg-dark-green btn-lg mb-2">Professores</a>
         {% elif user.type == 'teacher' %}
-        <a href="{% url 'main:disciplinas' %}" class="btn btn-action fw-bold bg-dark-green btn-lg mb-2">Disciplinas</a>
+        <a href="{% url 'main:subjects' %}" class="btn btn-action fw-bold bg-dark-green btn-lg mb-2">Disciplinas</a>
         <a href="#" class="btn btn-action fw-bold bg-dark-green btn-lg mb-2">Eventos</a>
         <a href="#" class="btn btn-action fw-bold bg-dark-green btn-lg mb-2">Lançar Aula</a>
         {% elif user.type == 'coordinator' %}

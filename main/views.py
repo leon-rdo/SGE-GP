@@ -9,17 +9,23 @@ class IndexView(TemplateView):
 class MeuPerfilView(TemplateView):
     template_name = "main/meu-perfil.html"
 
+
 class DisciplinasView(ListView):
-    model = Disciplina
+    model = Subject
     template_name = "main/disciplinas.html"
-    context_object_name = "disciplinas"
+    context_object_name = "subjects"
     
 
 class DesempenhoView(DetailView):
-    model = Disciplina
+    model = Subject
     template_name = "main/desempenho.html"
 
 
-class AtividadesView(DetailView):
-    model = Disciplina
+class AtividadesView(ListView):
+    model = Activity
     template_name = "main/atividades.html"
+    
+
+class AtividadeView(DetailView):
+    model = Activity
+    template_name = "main/atividade.html"

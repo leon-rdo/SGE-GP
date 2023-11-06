@@ -26,7 +26,7 @@
           {% else %}
           <div>
             {% if request.resolver_match.url_name == 'index' %}
-              <a class="btn bg-light-green btn-navbar text-dark-green fw-bold rounded-pill me-3" href="{% url 'main:disciplinas' %}" role="button">Ver sistema</a>
+              <a class="btn bg-light-green btn-navbar text-dark-green fw-bold rounded-pill me-3" href="{% url 'main:subjects' %}" role="button">Ver sistema</a>
             {% endif %}
             <a class="btn btn-danger btn-navbar fw-bold rounded-pill" href="{% url 'account_logout' %}" role="button">Sair</a>
         </div>
