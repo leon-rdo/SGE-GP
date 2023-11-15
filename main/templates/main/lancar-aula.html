@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}SGE-GP | Disciplinas{% endblock title %}
+
+{% block aside %}
+ {% include "main/snippets/aside.html" %}
+{% endblock aside %}
+
+{% block content %}
+<div class="col-9">
+    <div class="row">
+        <form method="post" class="col-12">
+            {% csrf_token %}
+            {% load widget_tweaks %}
+            {% for field in form %}
+              <div class="form-floating mb-3">
+                {% render_field field placeholder="dummy" required=True class="form-control" %}
+                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+              </div>
+            {% endfor %}
+        </form>
+    </div>
+</div>
+{% endblock content %}

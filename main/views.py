@@ -1,6 +1,7 @@
 from django.views.generic import TemplateView, ListView, DetailView
 from .models import *
 from accounts.models import User
+from django.views.generic.edit import CreateView
 
 class IndexView(TemplateView):
     template_name = "main/index.html"
@@ -29,3 +30,9 @@ class AtividadesView(ListView):
 class AtividadeView(DetailView):
     model = Activity
     template_name = "main/atividade.html"
+    
+    
+class LancarAulaView(CreateView):
+    model = Classroom
+    template_name = "main/lancar-aula.html"
+    fields = '__all__'

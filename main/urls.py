@@ -9,4 +9,5 @@ urlpatterns = [
     path("disciplinas/<int:pk>/desempenho/", DesempenhoView.as_view(), name="performance"),
     path("disciplinas/<int:pk>/atividades/", AtividadesView.as_view(), name="activities"),
     path("disciplinas/<int:pk>/atividades/<int:id>/", AtividadeView.as_view(), name="activity"),
+    path("lancar-aula/", LancarAulaView.as_view(), name="launch-class"),
 ]

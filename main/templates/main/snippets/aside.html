@@ -10,7 +10,7 @@
         {% elif user.type == 'teacher' %}
         <a href="{% url 'main:subjects' %}" class="btn btn-action fw-bold bg-dark-green btn-lg mb-2">Disciplinas</a>
         <a href="#" class="btn btn-action fw-bold bg-dark-green btn-lg mb-2">Eventos</a>
-        <a href="#" class="btn btn-action fw-bold bg-dark-green btn-lg mb-2">Lançar Aula</a>
+        <a href="{% url 'main:launch-class' %}" class="btn btn-action fw-bold bg-dark-green btn-lg mb-2">Lançar Aula</a>
         {% elif user.type == 'coordinator' %}
         <a href="#" class="btn btn-action fw-bold bg-dark-green btn-lg mb-2">Turmas</a>
         <a href="#" class="btn btn-action fw-bold bg-dark-green btn-lg mb-2">Eventos</a>
