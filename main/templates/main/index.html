@@ -1,75 +1,67 @@
 {% extends "base.html" %}
-{% load static%}
-
+{% load static %}
 
 {% block title %}Conheça o SGE-GP{% endblock title %}
+
 {% block head %}
 {% endblock head %}
+
 {% block container %}
-<main>
-  <section class="conteudo container-fluid">
-    <div class="row justify-content-center g-3">
-      <div class="col-6 d-flex align-items-center justify-content-center">
-        <div class="esquerda"><br><br><br><br>
-          <h1 class="text-dark-green" style="font-family: Candal;filter:drop-shadow(6px 8px #FFF7E0);">Conheça o nosso sistema!</h1><br><br>
-          <p class="fw-bold">O Sistema de Gestão Educacional do Geraldo Palmeira possibilita a conexão dos alunos com a instituição!</p>
-          <br>
-          <p class="fw-bold text-center">Acompanhe seu desempenho escolar e suas atividades.</p><br><br><br><br><br><br><br><br><br><br>
-        </div>
-      </div>
-      <div class="col-6 d-flex justify-content-center">
-        <div class="direita">
-          <div class="circulo">
-            <img src="{%static 'main/img/estudante-com-computador-que-estuda-na-escola-33080012.jpg'%}"
-              alt="Estudantes">
-          </div>
+<section class="row justify-content-center h-100vh g-0 px-4 px-md-5 pb-5 position-relative">
+  <div class="col-12 col-md-7">
+    <h1 id="landing-page-text-one" class="landing-page-text display-4">Conheça o nosso sistema!</h1>
+    <div class="d-md-none">
+      <p class="h5 fw-bold">O Sistema de Gestão Educacional do Geraldo Palmeira possibilita a conexão dos alunos com a instituição!</p>
+      <p class="h5 fw-bold">Acompanhe seu desempenho escolar e suas atividades.</p>
+    </div>
+  </div>
+  <div class="col-12 col-md-5">
+    <div class="ratio ratio-1x1 overflow-hidden mt-5 w-75 d-none d-md-block">
+      <img class="object-fit-cover rounded-circle" src="https://images.squarespace-cdn.com/content/v1/50cca155e4b0c301a8212ad4/1493737256585-4CARE8Q8Y5KTBB5U8NF2/image-asset.jpeg" alt="Alunos usando computador">
+    </div>
+    <img class="img-fluid d-md-none" src="https://images.squarespace-cdn.com/content/v1/50cca155e4b0c301a8212ad4/1493737256585-4CARE8Q8Y5KTBB5U8NF2/image-asset.jpeg" alt="Alunos usando computador">
+  </div>
+  <div class="position-absolute top-0 start-0 z-n1 d-none d-md-block" style="width: 55%;">
+    <img src='{% static "main/images/Pêra com Texto.svg" %}' class="w-100 mt-3 mt-lg-0">
+  </div>
+  <div class="position-absolute bottom-0 end-0 z-n1 d-none d-md-block" style="width: min-content; height: min-content;"><img src='{% static "main/images/s.png" %}' class="h-100vh"></div>
+</section>
+<section class="dark-green-bg h-100vh p-4 p-md-5">
+  <div class="row justify-content-end px-md-5">
+    <div class="col-12 col-md-9 col-lg-6">
+      <h1 id="landing-page-text-two" class="landing-page-text d-none d-md-block display-4 text-white text-end mb-5">O que você pode fazer aqui?</h1>
+      <h1 class="landing-page-text d-md-none display-4">O que você pode fazer aqui?</h1>
+    </div>
+  </div>
+  <div class="row row-cols-2 row-cols-lg-4 g-3 g-md-5 pt-5 px-md-5">
+    <div class="col">
+      <div class="card card-landing-page ratio ratio-1x1 rounded-5">
+        <div class="card-body d-flex justify-content-center align-items-center">
+          <h2 class="card-title text-center fw-bold">Ver suas notas</h2>
         </div>
       </div>
     </div>
-  </section>
-  <section class="baixo container-fluid bg-dark-green">
-    <div class="row">
-      <p class="text-center fs-1 py-5" style="font-family: Candal;filter:drop-shadow(6px 8px black);">O que você pode fazer aqui ?</p>
-    </div>
-    <div class="row row-cols-2 row-cols-md-4 g-2 d-flex align-items-center">
-      <div class="col d-flex justify-content-center">
-        <div class="card w-75 card-subject ratio ratio-1x1 rounded-4 bg-light-green">
-          <div class="card-body d-flex flex-column justify-content-center text-center">
-            <h4 class="card-title text-dark-green fw-bold mb-4">Ver suas notas</h4>
-          </div>
-        </div>
-      </div>
-      <div class="col d-flex justify-content-center">
-        <div class="card w-75 card-subject ratio ratio-1x1 rounded-4 bg-light-green">
-          <div class="card-body d-flex flex-column justify-content-center text-center">
-            <h4 class="card-title text-dark-green fw-bold mb-4">Ver sua Frequência</h4>
-          </div>
-        </div>
-      </div>
-      <div class="col d-flex justify-content-center">
-        <div class="card w-75 card-subject ratio ratio-1x1 rounded-4 bg-light-green">
-          <div class="card-body d-flex flex-column justify-content-center text-center">
-            <h4 class="card-title text-dark-green fw-bold mb-4">Ver suas Atividades</h4>
-          </div>
-        </div>
-      </div>
-      <div class="col d-flex justify-content-center">
-        <div class="card w-75 card-subject ratio ratio-1x1 rounded-4 bg-light-green">
-          <div class="card-body d-flex flex-column justify-content-center text-center">
-            <h4 class="card-title text-dark-green fw-bold mb-4">Ver os eventos do CGP</h4>
-          </div>
+    <div class="col">
+      <div class="card card-landing-page ratio ratio-1x1 rounded-5">
+        <div class="card-body d-flex justify-content-center align-items-center">
+          <h2 class="card-title text-center fw-bold">Ver sua frequência</h2>
         </div>
       </div>
     </div>
-  </section>
-</main>
-
+    <div class="col">
+      <div class="card card-landing-page ratio ratio-1x1 rounded-5">
+        <div class="card-body d-flex justify-content-center align-items-center">
+          <h2 class="card-title text-center fw-bold">Ver suas atividades</h2>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card card-landing-page ratio ratio-1x1 rounded-5">
+        <div class="card-body d-flex justify-content-center align-items-center">
+          <h2 class="card-title text-center fw-bold">Saber de nossos eventos</h2>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 {% endblock container %}
-
-{% block script %}
-<script>
-  let body = document.querySelector('body');
-  body.classList.remove('overflow-hidden');
-
-</script>
-{% endblock script %}
