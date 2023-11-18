@@ -8,8 +8,9 @@ class Subject(models.Model):
         "Class", on_delete=models.CASCADE, verbose_name="Turma"
     )
     academic_probation = models.ManyToManyField(
-        "accounts.User", related_name="academic_probation", verbose_name="Dependência", blank=True, null=True
+        "accounts.User", related_name="academic_probation", verbose_name="Dependência", blank=True
     )
+    teacher = models.ForeignKey('accounts.User', on_delete=models.CASCADE, verbose_name='Professor', blank=True, null=True)
 
     def __str__(self):
         return self.name
@@ -41,7 +42,7 @@ class Class(models.Model):
     code = models.CharField("Código", max_length=10)
     level = models.CharField("Nível", max_length=50, choices=LEVELS)
     enrolled = models.ManyToManyField(
-        "accounts.User", related_name="matriculados", verbose_name="Matriculados", blank=True, null=True
+        "accounts.User", related_name="matriculados", verbose_name="Matriculados", blank=True
     )
     academic_year = models.IntegerField("Ano Letivo")
 
@@ -73,8 +74,7 @@ class Classroom(models.Model):
         verbose_name_plural = "Aulas"
 
     def __str__(self):
-        return self.subject.name + " - " + self.class_code + " - " + str(self.date)
-
+        return str(self.subject.name) + " - " + str(self.class_code) + " - " + str(self.date)
 
 class Test(models.Model):
     TESTS = (
@@ -153,7 +153,7 @@ class Event(models.Model):
     description = models.TextField("Descrição")
     date_time = models.DateTimeField("Data e Hora")
     enrolled = models.ManyToManyField(
-        "accounts.User", related_name="participants", verbose_name="Participantes", blank=True, null=True
+        "accounts.User", related_name="participants", verbose_name="Participantes", blank=True
     )
 
     class Meta:

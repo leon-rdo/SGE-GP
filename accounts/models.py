@@ -12,13 +12,21 @@ class User(AbstractUser):
         ('coordinator', 'Coordenador'),
     )
     
+    GENDERS = (
+        ('M', 'Masculino'),
+        ('F', 'Feminino'),
+    )
+    
     groups = models.ManyToManyField(Group, blank=True, related_name='usuarios')
     user_permissions = models.ManyToManyField(Permission, blank=True, related_name='usuarios')
+    middle_name = models.CharField('Nome do meio', max_length=55, blank=True, null=True)
+    gender = models.CharField('Sexo', max_length=1, blank=True, null=True, choices=GENDERS)
     code = models.CharField('Matrícula', max_length=15, blank=True, null=True)
     type = models.CharField('Tipo', max_length=11, choices=TYPES)
 
     def __str__(self):
-        return self.username
+        names = [self.first_name, self.middle_name, self.last_name]
+        return ' '.join(name for name in names if name is not None)
 
     class Meta:
         verbose_name = 'Usuário'
