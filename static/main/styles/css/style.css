@@ -133,6 +133,13 @@ main {
 /* Disciplinas */
 
 .card-subject a {
-  font-size: 0.7rem;
   aspect-ratio: 1/1;
+  width: 50%;
+  height: auto; 
+  overflow: hidden;
+}
+
+.card-subject a span {
+  white-space: nowrap;
+  font-size: clamp(0.7rem, 0.72rem, 0.9rem);
 }
