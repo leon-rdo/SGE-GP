@@ -48,7 +48,7 @@
 
     {% block container %}
     <main class="container">
-        <div class="row justify-content-center g-4">
+        <div class="row justify-content-center g-5">
             {% block aside %}{% endblock aside %}
             {% block content %}{% endblock content %}
         </div>
@@ -56,7 +56,7 @@
     {% endblock container %}
     
 
-    <footer>
+    <footer class="mt-5">
         <nav class="navbar bg-dark" data-bs-theme="dark">
             <div class="container-fluid justify-content-center">
                 <img src="{% static 'main/icons/CEGP.svg' %}" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
