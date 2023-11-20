@@ -14,9 +14,9 @@
   <body class="d-flex flex-column">
 
     <header>
-      <nav class="navbar bg-green mb-5" id="navbar">
-        <div class="container justify-content-between">
-          <a class="navbar-brand text-white fs-3">
+      <nav id="navbar" class="navbar bg-green mb-5" data-bs-theme="dark">
+        <div class="container-fluid justify-content-between text-white">
+          <a class="navbar-brand fs-3" href="{% url 'main:index' %}">
             <img class="me-2" src="{% static 'main/icons/CEGP.svg' %}" alt="Logo do Colégio Geraldo Palemeira">
             SGE-GP  
           </a>
@@ -26,12 +26,56 @@
             <a class="btn bg-light-green fw-bold text-dark-green btn-navbar rounded-pill" id="botaoCadastro" href="{% url 'account_signup' %}" role="button">Cadastre-se</a>
           </div>
           {% else %}
-          <div>
             {% if request.resolver_match.url_name == 'index' %}
               <a class="btn bg-light-green btn-navbar text-dark-green fw-bold rounded-pill me-3" href="{% url 'main:subjects' %}" role="button">Ver sistema</a>
+            {% else %}
+              <button class="navbar-toggler d-md-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="bi bi-list fw-bold text-white fs-1"></i>
+              </button>
+              <ul id="navbarToggler" class="navbar-nav collapse navbar-collapse mt-2 me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'main:my-profile' %}">Meu Perfil</a>
+                </li>
+                {% if user.type == 'guardian' or user.type == 'student' %}
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'main:subjects' %}">Disciplinas</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Eventos</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Professores</a>
+                </li>
+                {% elif user.type == 'teacher' %}
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'main:subjects' %}">Disciplinas</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Eventos</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'main:launch-class' %}">Lançar Aula</a>
+                </li>
+                {% elif user.type == 'coordinator' %}
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Turmas</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Eventos</a>
+                </li>
+                {% endif %}
+                {% if user.is_staff %}
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'admin:index' %}">Administração</a>
+                </li>
+                {% endif %}
+                <li class="nav-item">
+                  <a class="btn btn-danger btn-navbar fw-bold rounded-pill d-none d-md-block" href="{% url 'account_logout' %}" role="button">Sair</a>
+                </li>
+              </ul>
+        
             {% endif %}
-            <a class="btn btn-danger btn-navbar fw-bold rounded-pill" href="{% url 'account_logout' %}" role="button">Sair</a>
-        </div>
+            <a class="btn btn-danger btn-navbar fw-bold rounded-pill d-none d-md-block" href="{% url 'account_logout' %}" role="button">Sair</a>
           {% endif %}
         </div>
       </nav>

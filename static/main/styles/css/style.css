@@ -46,6 +46,17 @@ main {
   width: 60px;
 }
 
+#navbarToggler .nav-item {
+  width: 100%;
+  text-align: left;
+}
+
+.navbar .nav-link {
+  font-size: large;
+  font-weight: bold;
+  color: white;
+}
+
 .btn:hover {
   background-color: #fff7e0;
   color: #105f26;
