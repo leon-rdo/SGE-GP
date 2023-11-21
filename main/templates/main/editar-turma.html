@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block title %}SGE-GP | Turmas{% endblock title %}
+
+{% block head %}
+<style>
+    #id_enrolled {
+        min-height: 100%;
+    }
+</style>
+{% endblock head %}
+
+{% block aside %}
+  {% include "main/snippets/aside.html" %}
+{% endblock aside %}
+
+
+
+{% block content %}
+<div class="col-12 col-md-9 text-center">
+    <h1>Criar Turma</h1>
+    <form method="post" class="row justify-content-center">
+    {% csrf_token %}
+    {% load widget_tweaks %}
+        <div class="col-12 col-md-6">
+            {% for field in form %}
+            {% if field != form.enrolled %}
+            <div class="form-floating mb-3">
+                {% render_field field placeholder=field.label required=True class="form-control" %}
+                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+            </div>              
+            {% endif %}
+            {% endfor %}
+        </div>
+
+        <div class="col-12 col-md-6">
+            <div class="form-floating h-100 mb-3">
+                {% render_field form.enrolled placeholder=form.enrolled.label required=True class="form-control" %}
+                <label for="{{ form.enrolled.id_for_label }}">{{ form.enrolled.label }}</label>
+            </div>
+        </div>
+        
+        <div class="col-12 d-flex justify-content-center mt-3">
+            <a href="{% url 'main:class' object.pk %}" class="btn bg-dark-green me-2" role="button" style="height: min-content;">
+                <i class="bi bi-arrow-left"></i>
+                Voltar
+            </a>
+            <button type="submit" class="btn bg-dark-green mb-2">Criar Turma</button>
+        </div>
+  </form>
+</div>
+{% endblock content %}

@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %}SGE-GP | Turmas{% endblock title %}
+
+{% block aside %}
+{% include "main/snippets/aside.html" %}
+{% endblock aside %}
+
+{% block content %}
+<div class="col-12 col-md-9">
+    <div class="d-flex justify-content-between align-items-center w-100 mb-2">
+        <h1>Turmas</h1>
+        <a class="btn btn-success btn-sm" href="{% url 'main:create-class' %}" role="button"
+            style="height: min-content;">
+            <i class="bi bi-plus"></i>
+            Criar Turma
+        </a>
+    </div>
+    <div class="row g-2">
+        {% if classes %}
+        <table class="table table-success table-hover table-striped-columns">
+            <thead>
+                <tr>
+                    <th scope="col">Código</th>
+                    <th scope="col">Nível</th>
+                    <th scope="col">Ano Letivo</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for class in classes %}
+                <tr>
+                    <td><a href="{% url 'main:class' class.pk %}" class="text-dark">{{ class.code }}</a></td>
+                    <td>{{ class.level }}</td>
+                    <td>{{ class.academic_year }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <div class="alert alert-warning" role="alert">
+            <h4 class="alert-heading">Não há turmas!</h4>
+            <p>Se você está vendo este alerta, é porque não há turmas registradas no sistema. Você pode criar uma nova turma no botão acima.</p>
+            <hr>
+            <p class="mb-0">Se você acha que isso é um erro contate o suporte.</p>
+          </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock content %}

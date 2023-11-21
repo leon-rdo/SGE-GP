@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block title %}SGE-GP | Eventos{% endblock title %}
+
+{% block aside %}
+ {% include "main/snippets/aside.html" %}
+{% endblock aside %}
+
+{% block content %}
+<div class="col-12 col-md-9">
+    <div class="row g-2">
+        <div class="col-12 col-md-6 fs-4">
+            <h1>{{ object }}</h1>
+            <h3>Matriculados</h3>
+            <ul class="list-group list-group-flush">
+                {% for student in object.enrolled.all %}
+                  <li class="list-group-item bg-transparent">{{ student }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="col-12">
+            <a href="{% url 'main:classes' %}" class="btn btn-success btn-sm" role="button" style="height: min-content;">
+                <i class="bi bi-arrow-left"></i>
+                Voltar
+            </a>
+            {% if user.type == 'coordinator' %}
+              <a href="{% url 'main:edit-class' object.pk %}" class="btn btn-success btn-sm">
+                Editar
+              </a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock content %}

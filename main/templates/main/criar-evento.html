@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block title %}SGE-GP | Criar Evento{% endblock title %}
+
+{% block head %}
+<style>
+    #id_description {
+        min-height: 100%;
+    }
+</style>
+{% endblock head %}
+
+{% block aside %}
+{% include "main/snippets/aside.html" %}
+{% endblock aside %}
+
+{% block content %}
+<div class="col-12 col-md-9">
+    {% if request.resolver_match.url_name == "create-event" %}
+    <h1>Criar Evento</h1>
+    {% elif request.resolver_match.url_name == "edit-event" %}
+    <h1>Editar Evento</h1>
+    {% endif %}
+    <form method="post" enctype="multipart/form-data" class="row">
+        {% csrf_token %}
+        {% load widget_tweaks %}
+        <div class="col-12 col-md-6">
+            <label class="form-label fw-bold" for="{{ form.image.id_for_label }}">{{ form.image.label }}:</label><br>
+            {% render_field form.image placeholder=form.image.label required=True class="form-control" %}
+            <div class="form-floating my-3">
+                {% render_field form.title placeholder=form.title.label required=True class="form-control" %}
+                <label for="{{ form.title.id_for_label }}">{{ form.title.label }}</label>
+            </div>
+            <div class="form-floating mb-3">
+                {% render_field form.date_time placeholder=form.date_time.label required=True class="form-control" type='datetime-local' %}
+                <label for="{{ form.date_time.id_for_label }}">{{ form.date_time.label }}</label>
+            </div>
+        </div>
+        
+        <div class="col-12 col-md-6">
+            <div class="form-floating h-100 mb-3">
+                {% render_field form.description placeholder=form.description.label required=True class="form-control" %}
+                <label for="{{ form.description.id_for_label }}">{{ form.description.label }} do Evento</label>
+            </div>
+        </div>
+
+        <div class="col-12 d-flex justify-content-center mt-3">
+            {% if request.resolver_match.url_name == "create-event" %}
+            <a href="{% url 'main:events' %}" class="btn btn-success me-2" role="button" style="height: min-content;">
+                <i class="bi bi-arrow-left"></i>
+                Voltar
+            </a>
+            <button type="submit" class="btn btn-success">Criar Evento</button>
+            {% elif request.resolver_match.url_name == "edit-event" %}
+            <a href="{% url 'main:event' event.pk %}" class="btn btn-success me-2" role="button" style="height: min-content;">
+                <i class="bi bi-arrow-left"></i>
+                Voltar
+            </a>
+            <button type="submit" class="btn btn-success">Salvar</button>
+            {% endif %}
+        </div>
+    </form>
+</div>
+{% endblock content %}

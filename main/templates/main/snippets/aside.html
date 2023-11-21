@@ -5,15 +5,15 @@
         <a href="{% url 'main:my-profile' %}" class="btn btn-action fw-bold bg-dark-green btn-lg mb-2">Meu Perfil</a>
         {% if user.type == 'guardian' or user.type == 'student' %}
         <a href="{% url 'main:subjects' %}" class="btn btn-action fw-bold bg-dark-green btn-lg mb-2">Disciplinas</a>
-        <a href="#" class="btn btn-action fw-bold bg-dark-green btn-lg mb-2">Eventos</a>
+        <a href="{% url 'main:events' %}" class="btn btn-action fw-bold bg-dark-green btn-lg mb-2">Eventos</a>
         <a href="#" class="btn btn-action fw-bold bg-dark-green btn-lg mb-2">Professores</a>
         {% elif user.type == 'teacher' %}
         <a href="{% url 'main:subjects' %}" class="btn btn-action fw-bold bg-dark-green btn-lg mb-2">Disciplinas</a>
-        <a href="#" class="btn btn-action fw-bold bg-dark-green btn-lg mb-2">Eventos</a>
+        <a href="{% url 'main:events' %}" class="btn btn-action fw-bold bg-dark-green btn-lg mb-2">Eventos</a>
         <a href="{% url 'main:launch-class' %}" class="btn btn-action fw-bold bg-dark-green btn-lg mb-2">Lançar Aula</a>
         {% elif user.type == 'coordinator' %}
-        <a href="#" class="btn btn-action fw-bold bg-dark-green btn-lg mb-2">Turmas</a>
-        <a href="#" class="btn btn-action fw-bold bg-dark-green btn-lg mb-2">Eventos</a>
+        <a href="{% url 'main:classes' %}" class="btn btn-action fw-bold bg-dark-green btn-lg mb-2">Turmas</a>
+        <a href="{% url 'main:events' %}" class="btn btn-action fw-bold bg-dark-green btn-lg mb-2">Eventos</a>
         {% endif %}
         {% if user.is_staff %}
         <a href="{% url 'admin:index' %}" class="btn btn-action fw-bold bg-dark-green btn-lg mb-2">Administração</a>
