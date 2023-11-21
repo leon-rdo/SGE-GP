@@ -7,31 +7,38 @@
   #id_class_diary {
     height: 12rem;
   }
-  #id_attendance_list {
-    height: 12rem;
+
+  #id_attendance_list,
+  .attendance_list-col {
+    height: 100%;
+  }
+
+  .attendance_list-form-floating{
+    height: 90%;
   }
 </style>
 {% endblock head %}
 
 {% block aside %}
-  {% include "main/snippets/aside.html" %}
+{% include "main/snippets/aside.html" %}
 {% endblock aside %}
 
 {% block content %}
 <div class="col-12 col-md-9">
-  <div class="row">
-    <form method="post" class="col-12">
-      {% csrf_token %}
-      {% load widget_tweaks %}
+  <form method="post" class="row">
+    {% csrf_token %}
+    {% load widget_tweaks %}
+    <div class="col-12 col-md-6">
+      <div class="input-group">
+        <div class="form-floating mb-3">
+          {% render_field form.subject placeholder=form.subject.label required=True class="form-control" %}
+          <label for="{{ form.subject.id_for_label }}">{{ form.subject.label }}</label>
+        </div>
 
-      <div class="form-floating mb-3">
-        {% render_field form.subject placeholder=form.subject.label required=True class="form-control" %}
-        <label for="{{ form.subject.id_for_label }}">{{ form.subject.label }}</label>
-      </div>
-
-      <div class="form-floating mb-3">
-        {% render_field form.class_code placeholder=form.class_code.label required=True class="form-control" %}
-        <label for="{{ form.class_code.id_for_label }}">{{ form.class_code.label }}</label>
+        <div class="form-floating mb-3">
+          {% render_field form.class_code placeholder=form.class_code.label required=True class="form-control" %}
+          <label for="{{ form.class_code.id_for_label }}">{{ form.class_code.label }}</label>
+        </div>
       </div>
 
       <div class="form-floating mb-3">
@@ -39,26 +46,28 @@
         <label for="{{ form.date.id_for_label }}">{{ form.date.label }}</label>
       </div>
 
-      <div class="mb-3">
-        <div class="form-floating">
-          {% render_field form.attendance_list required=True class="form-control" %}
-          <label for="{{ form.attendance_list.id_for_label }}">{{ form.attendance_list.label }}</label>
-        </div>
-        <small class="form-text d-none d-md-block">
-          Pressione <kbd>Ctrl</kbd> para selecionar mais de um aluno.
-        </small>
-        <small class="form-text d-md-none">
-          Toque e segure para selecionar mais de um aluno.
-        </small>
-      </div>
-
       <div class="form-floating mb-3">
         {% render_field form.class_diary placeholder=form.class_diary.label required=True class="form-control" %}
         <label for="{{ form.class_diary.id_for_label }}">{{ form.class_diary.label }}</label>
       </div>
-
+    </div>
+    <div class="col-12 col-md-6">
+    <div class="mb-3 attendance_list-col">
+      <div class="form-floating attendance_list-form-floating">
+        {% render_field form.attendance_list required=True class="form-control" %}
+        <label for="{{ form.attendance_list.id_for_label }}">{{ form.attendance_list.label }}</label>
+      </div>
+      <small class="form-text d-none d-md-block">
+        Segure <kbd>Ctrl</kbd> para selecionar mais de um aluno.
+      </small>
+      <small class="form-text d-md-none">
+        Toque e segure para selecionar mais de um aluno.
+      </small>
+    </div>
+    </div>
+    <div class="col-12 d-flex justify-content-center mt-3">
       <button type="submit" class="btn bg-dark-green mb-2">Lançar Aula</button>
-    </form>
-  </div>
+    </div>
+  </form>
 </div>
 {% endblock content %}
