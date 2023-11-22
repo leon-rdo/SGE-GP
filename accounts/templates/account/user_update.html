@@ -1,0 +1,69 @@
+{% extends 'account/base.html' %}
+{% load widget_tweaks %}
+
+{% block head_title %}Atualizar Perfil{% endblock %}
+
+{% block content %}
+<h1 class="fw-bold">Atualizar Dados</h1>
+
+<form method="post">
+    {% csrf_token %}
+
+    <div class="input-group mb-3">
+        <span class="input-group-text" id="basic-addon1">@</span>
+        <div class="form-floating flex-grow-1">
+            {{ form.username.errors|safe }}
+            {% render_field form.username placeholder=form.username.label id=form.username.id name=form.username.name type=form.username.field.widget.input_type autocomplete=form.username.name required=True class="form-control" aria-describedby="basic-addon1" %}
+            <label for="{{ form.username.id_for_label }}" class="floatingInput">{{ form.username.label }}</label>
+        </div>
+    </div>
+
+    <div class="input-group">
+        <div class="form-floating flex-grow-1">
+            {{ form.first_name.errors|safe }}
+            {% render_field form.first_name placeholder=form.first_name.label id=form.first_name.id name=form.first_name.name type=form.first_name.field.widget.input_type autocomplete=form.first_name.name required=True class="form-control mb-2" %}
+            <label for="{{ form.first_name.id_for_label }}" class="floatingInput">{{ form.first_name.label }}</label>
+        </div>
+
+        <div class="form-floating flex-grow-1">
+            {{ form.middle_name.errors|safe }}
+            {% render_field form.middle_name placeholder=form.middle_name.label id=form.middle_name.id name=form.middle_name.name type=form.middle_name.field.widget.input_type autocomplete=form.middle_name.name required=True class="form-control mb-2" %}
+            <label for="{{ form.middle_name.id_for_label }}" class="floatingInput">{{ form.middle_name.label }}</label>
+        </div>
+
+        <div class="form-floating flex-grow-1">
+            {{ form.last_name.errors|safe }}
+            {% render_field form.last_name placeholder=form.last_name.label id=form.last_name.id name=form.last_name.name type=form.last_name.field.widget.input_type autocomplete=form.last_name.name required=True class="form-control mb-2" %}
+            <label for="{{ form.last_name.id_for_label }}" class="floatingInput">{{ form.last_name.label }}</label>
+        </div>
+    </div>
+
+    <div class="form-floating">
+        {{ form.birthdate.errors|safe }}
+        {% render_field form.birthdate placeholder=form.birthdate.label id='id_birthdate' name=form.birthdate.name autocomplete=form.birthdate.name class="form-control mb-2" type='date' %}
+        <label for="{{ form.birthdate.id_for_label }}" class="floatingInput">{{ form.birthdate.label }}</label>
+    </div>
+    
+    {% for field in form %}
+        {% if field.name not in 'username, first_name, middle_name, last_name, birthdate' %}
+            <div class="form-floating">
+                {{ field.errors|safe }}
+                {% render_field field placeholder=field.label id=field.id name=field.name type=field.field.widget.input_type autocomplete=field.name required=True class="form-control mb-2" %}
+                <label for="{{ field.id_for_label }}" class="floatingInput">{{ field.label }}</label>
+            </div>
+        {% endif %}
+    {% endfor %}
+    <button type="submit" class="btn btn-success w-100 fs-5 mt-4">Salvar</button>
+</form>
+{% endblock %}
+
+{% block extra_body %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var formattedDate = "{{ form.birthdate.value|date:'Y-m-d' }}";
+        document.getElementById('id_birthdate').value = formattedDate;
+        console.log(formattedDate);
+        console.log(document.getElementById('id_birthdate'));
+    });
+</script>
+{% endblock extra_body %}
