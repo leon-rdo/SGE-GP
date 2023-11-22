@@ -3,22 +3,23 @@
 {% block title %}SGE-GP | Avaliações{% endblock title %}
 
 {% block aside %}
-  {% include "main/snippets/aside.html" %}
+{% include "main/snippets/aside.html" %}
 {% endblock aside %}
 
 {% block content %}
 <div class="col-12 col-md-9">
-    <div class="d-flex justify-content-between align-items-center w-100">
-        <h1>Avaliações</h1>
-        <a class="btn btn-success" href="{% url 'main:open-test' subject.slug %}" role="button" style="height: min-content;">
-            <i class="bi bi-plus"></i>
-            Abrir Avaliação
-        </a>
-    </div>
+  <div class="d-flex justify-content-between align-items-center w-100">
+    <h1>Avaliações</h1>
+    <a class="btn btn-success" href="{% url 'main:open-test' subject.slug %}" role="button"
+      style="height: min-content;">
+      <i class="bi bi-plus"></i>
+      Abrir Avaliação
+    </a>
+  </div>
   <div class="row {% if tests %}row-cols-1 row-cols-md-2 row-cols-lg-3{% endif %} g-2 mt-3">
-    {% for test in tests %}      
+    {% for test in tests %}
     <a href="{% url 'main:grades' test.pk %}" class="col text-decoration-none">
-      <div class="card card-test" style="background-color: green; color: white;"> 
+      <div class="card card-test" style="background-color: green; color: white;">
         <div class="card-body">
           <h5 class="card-title"><strong>{{ test }}</strong></h5>
           <p class="card-text">Em {{ test.date|date:"d/m/Y" }}</p>
@@ -34,5 +35,10 @@
     </div>
     {% endfor %}
   </div>
+  <a href="{% url 'main:subjects' %}" class="btn bg-light-green mt-2" role="button"
+    style="height: min-content;">
+    <i class="bi bi-arrow-left"></i>
+    Voltar
+  </a>
 </div>
 {% endblock content %}
