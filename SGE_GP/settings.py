@@ -45,7 +45,7 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    'widget_tweaks'
+    'widget_tweaks',
 ]
 
 AUTHENTICATION_BACKENDS = (

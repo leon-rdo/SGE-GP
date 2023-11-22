@@ -7,6 +7,12 @@ main {
   flex: 1;
 }
 
+h1,
+h2 {
+  font-family: 'Candal', sans-serif;
+  color: #105f26 !important;
+}
+
 .bg-green {
   background-color: #007b23;
 }
@@ -135,11 +141,28 @@ main {
 .card-subject a {
   aspect-ratio: 1/1;
   width: 50%;
-  height: auto; 
+  height: auto;
   overflow: hidden;
 }
 
 .card-subject a span {
   white-space: nowrap;
   font-size: clamp(0.7rem, 0.72rem, 0.9rem);
+}
+
+/* Desempenho */
+
+.assessment,
+.grade {
+  font-weight: bold;
+  color: #21561a;
+}
+
+.card-assessment {
+  min-height: 25rem;
+}
+
+.card-frequency {
+  width: 8rem;
+  height: 8rem;
 }

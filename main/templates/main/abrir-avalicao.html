@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block title %}SGE-GP | Abrir Avaliação{% endblock title %}
+
+{% block aside %}
+{% include "main/snippets/aside.html" %}
+{% endblock aside %}
+
+{% block content %}
+<div class="col-12 col-md-9 text-center">
+    <h1>Abrir Avaliação</h1>
+    <form method="post" class="row justify-content-center">
+        {% csrf_token %}
+        {% load widget_tweaks %}
+        <div class="col-12 col-md-4">
+            {% for field in form %}
+            <div class="form-floating mb-3">
+                {% render_field field placeholder=field.label required=True class="form-control" %}
+                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="col-12 d-flex justify-content-center mt-3">
+            <a href="{% url 'main:tests' subject.slug %}" class="btn bg-dark-green me-2" role="button"
+                style="height: min-content;">
+                <i class="bi bi-arrow-left"></i>
+                Voltar
+            </a>
+            <button type="submit" class="btn bg-dark-green mb-2">Abrir</button>
+        </div>
+    </form>
+</div>
+{% endblock content %}

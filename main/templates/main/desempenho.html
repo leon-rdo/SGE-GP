@@ -2,6 +2,82 @@
 
 {% block title %}{{ object.nome }} | Desempenho{% endblock title %}
 
+{% block aside %}
+{% include "main/snippets/aside.html" %}
+{% endblock aside %}
+
 {% block content %}
-<h1 class="display-1">{{ object.name }}</h1>
+<div class="col-12 col-md-9">
+    <h1 class="display-5 text-center mb-2">{{ object.name }}</h1>
+    <div class="row row-cols-2 row-cols-md-4 justify-content-between align-items-center g-2">
+        <div class="col">
+            <div class="card card-assessment py-3">
+                <div class="card-body d-flex flex-column justify-content-between text-center">
+                    <h4 class="card-title assessment">1ª Avaliação</h4>
+                    <h2 class="card-text grade">{{ grades.1.grade|default:"-" }}</h2>
+                    <hr>
+                    <h4 class="card-title assessment">Recuperação</h4>
+                    <h4 class="card-text grade">{{ grades.1R.grade|default:"-" }}</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card card-assessment py-3">
+                <div class="card-body d-flex flex-column justify-content-between text-center">
+                    <h4 class="card-title assessment">2ª Avaliação</h4>
+                    <h2 class="card-text grade">{{ grades.2.grade|default:"-" }}</h2>
+                    <hr>
+                    <h4 class="card-title assessment">Recuperação</h4>
+                    <h4 class="card-text grade">{{ grades.2R.grade|default:"-" }}</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card card-assessment py-3">
+                <div class="card-body d-flex flex-column justify-content-between text-center">
+                    <h4 class="card-title assessment">3ª Avaliação</h4>
+                    <h4 class="card-text grade">{{ grades.3.grade|default:"-" }}</h2>
+                    <hr>
+                    <h4 class="card-title assessment">Recuperação</h4>
+                    <h4 class="card-text grade">{{ grades.3R.grade|default:"-" }}</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card card-assessment py-3">
+                <div class="card-body d-flex flex-column justify-content-between text-center">
+                    <h4 class="card-title assessment">4ª Avaliação</h4>
+                    <h4 class="card-text grade">{{ grades.4.grade|default:"-" }}</h2>
+                    <hr>
+                    <h4 class="card-title assessment">Recuperação</h4>
+                    <h4 class="card-text grade">{{ grades.4R.grade|default:"-" }}</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row my-4">
+        <h1 class="display-5 text-center my-4">
+            Frequência
+            <br>
+            <small style="font-size: medium;">(Suas Faltas)</small>
+        </h1>
+        
+        <div class="d-flex overflow-x-scroll w-100">
+            <div class="d-flex">
+                {% for absent in absents %}
+                <div class="card card-frequency bg-danger me-3 ">
+                    <div class="card-body text-center text-white fw-bold">
+                        <h4 class="card-title">Data:</h4>
+                        <h4 class="card-text fw-bold">{{ absent.date|date:'d/m' }}<br>{{ absent.date|date:'Y' }}</h4>
+                    </div>
+                </div>
+                {% empty %}
+                <div class="alert alert-success w-100" role="alert">
+                    <strong>Não há faltas!</strong> Você nunca faltou nesta disciplina.
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
 {%endblock content%}

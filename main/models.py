@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.text import slugify
 
 
 class Subject(models.Model):
@@ -11,6 +12,12 @@ class Subject(models.Model):
         "accounts.User", related_name="academic_probation", verbose_name="Dependência", blank=True
     )
     teacher = models.ForeignKey('accounts.User', on_delete=models.CASCADE, verbose_name='Professor', blank=True, null=True)
+    slug = models.SlugField(max_length=200, editable=False, unique=True, blank=True)
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(f"{self.name} {self.class_code}")
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return self.name
@@ -68,6 +75,12 @@ class Classroom(models.Model):
         verbose_name="lista de presença",
     )
     class_diary = models.TextField("Diário de Classe")
+    
+    def get_absent_students(self):
+        all_students = self.class_code.students.all()
+        present_students = self.attendance_list.all()
+        absent_students = all_students.difference(present_students)
+        return absent_students
 
     class Meta:
         verbose_name = "Aula"
@@ -103,7 +116,7 @@ class Test(models.Model):
         verbose_name_plural = "Provas"
 
     def __str__(self):
-        return self.school_test + " de " + self.subject.name + " - " + self.class_code
+        return self.get_school_test_display() + " de " + self.subject.name + " - " + str(self.class_code)
 
 
 class Grade(models.Model):
@@ -125,7 +138,7 @@ class Grade(models.Model):
             + " - "
             + self.test.subject.name
             + " - "
-            + self.test.class_code
+            + str(self.test.class_code)
         )
 
 

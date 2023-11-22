@@ -10,7 +10,7 @@
 <div class="col-9">
     <div class="d-flex justify-content-between align-items-center w-100">
         <h1>Eventos</h1>
-        {% if user.type == 'cordinator' %}
+        {% if user.type == 'coordinator' %}
         <a class="btn btn-success btn-sm" href="{% url 'main:create-event' %}" role="button" style="height: min-content;">
             <i class="bi bi-plus"></i>
             Criar Evento

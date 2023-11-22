@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %}SGE-GP | Avaliações{% endblock title %}
+
+{% block aside %}
+  {% include "main/snippets/aside.html" %}
+{% endblock aside %}
+
+{% block content %}
+<div class="col-12 col-md-9">
+    <div class="d-flex justify-content-between align-items-center w-100">
+        <h1>Avaliações</h1>
+        <a class="btn btn-success" href="{% url 'main:open-test' subject.slug %}" role="button" style="height: min-content;">
+            <i class="bi bi-plus"></i>
+            Abrir Avaliação
+        </a>
+    </div>
+  <div class="row {% if tests %}row-cols-1 row-cols-md-2 row-cols-lg-3{% endif %} g-2 mt-3">
+    {% for test in tests %}      
+    <a href="{% url 'main:grades' test.pk %}" class="col text-decoration-none">
+      <div class="card card-test" style="background-color: green; color: white;"> 
+        <div class="card-body">
+          <h5 class="card-title"><strong>{{ test }}</strong></h5>
+          <p class="card-text">Em {{ test.date|date:"d/m/Y" }}</p>
+        </div>
+      </div>
+    </a>
+    {% empty %}
+    <div class="alert alert-info" role="alert">
+      <h4 class="alert-heading">Não há avaliações registradas!</h4>
+      <p>Não existem avaliações previstas ou passadas.</p>
+      <hr>
+      <p class="mb-0">Se você acha que isso é um erro, contate o suporte.</p>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock content %}

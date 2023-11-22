@@ -33,12 +33,12 @@ class TestAdmin(admin.ModelAdmin):
     list_display = ['__str__', 'date']
     search_fields = ['school_test', 'subject__name', 'class_code']
     list_filter = ['date', 'school_test']
-    
 
 
 @admin.register(Grade)
 class GradeAdmin(admin.ModelAdmin):
     list_display = ['student', 'test', 'grade']
+    list_filter = ['test__date', 'test__school_test']
     search_fields = ['student', 'test']
     readonly_fields = ['student', 'test']
 
