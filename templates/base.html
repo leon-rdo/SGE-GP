@@ -45,27 +45,27 @@
                 <a class="nav-link" href="{% url 'main:subjects' %}">Disciplinas</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Eventos</a>
+                <a class="nav-link" href="{% url 'main:events' %}">Eventos</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Professores</a>
+                <a class="nav-link" href="{% url 'main:teachers' %}">Professores</a>
               </li>
               {% elif user.type == 'teacher' %}
               <li class="nav-item">
                 <a class="nav-link" href="{% url 'main:subjects' %}">Disciplinas</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Eventos</a>
+                <a class="nav-link" href="{% url 'main:events' %}">Eventos</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="{% url 'main:launch-class' %}">Lançar Aula</a>
               </li>
               {% elif user.type == 'coordinator' %}
               <li class="nav-item">
-                <a class="nav-link" href="#">Turmas</a>
+                <a class="nav-link" href="{% url 'main:classes' %}">Turmas</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Eventos</a>
+                <a class="nav-link" href="{% url 'main:events' %}">Eventos</a>
               </li>
               {% endif %}
               {% if user.is_staff %}

@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}SGE-GP | Disciplinas{% endblock title %}
+
+{% block aside %}
+{% include "main/snippets/aside.html" %}
+{% endblock aside %}
+
+{% block content %}
+<div class="col-12 col-md-9">
+    <h1>Meus Professores</h1>
+    <ul class="list-group my-3">
+        {% for subject in subjects %}
+        <li class="list-group-item d-flex align-items-center justify-content-between bg-dark-green fs-5">
+            <span class="d-md-none">
+                {{ subject.teacher.first_name }} {{ subject.teacher.last_name }}
+            </span>
+            <span class="d-none d-md-block">
+                {{ subject.teacher }}
+            </span>
+            <span class="badge bg-success" style="min-width: 8rem;">
+                {{ subject.name }}
+            </span>
+        </li>
+        {% empty %}
+        <h1 class="display-3">Você ainda não tem professores!</h1>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'main:subjects' %}" class="btn bg-light-green" role="button"
+        style="height: min-content;">
+        <i class="bi bi-arrow-left"></i>
+        Voltar
+    </a>
+</div>
+{% endblock content %}

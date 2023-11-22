@@ -6,7 +6,7 @@
         {% if user.type == 'guardian' or user.type == 'student' %}
         <a href="{% url 'main:subjects' %}" class="btn btn-action fw-bold bg-dark-green btn-lg mb-2">Disciplinas</a>
         <a href="{% url 'main:events' %}" class="btn btn-action fw-bold bg-dark-green btn-lg mb-2">Eventos</a>
-        <a href="#" class="btn btn-action fw-bold bg-dark-green btn-lg mb-2">Professores</a>
+        <a href="{% url 'main:teachers' %}" class="btn btn-action fw-bold bg-dark-green btn-lg mb-2">Professores</a>
         {% elif user.type == 'teacher' %}
         <a href="{% url 'main:subjects' %}" class="btn btn-action fw-bold bg-dark-green btn-lg mb-2">Disciplinas</a>
         <a href="{% url 'main:events' %}" class="btn btn-action fw-bold bg-dark-green btn-lg mb-2">Eventos</a>

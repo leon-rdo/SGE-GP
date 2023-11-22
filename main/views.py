@@ -4,6 +4,7 @@ from django.urls import reverse_lazy
 from django.views.generic import CreateView, DeleteView, DetailView, ListView, TemplateView, UpdateView
 
 from .forms import ClassroomForm, TestForm, GradeForm
+from accounts.models import User
 from .models import *
 
 
@@ -57,6 +58,20 @@ class LancarAulaView(CreateView):
         kwargs = super(LancarAulaView, self).get_form_kwargs()
         kwargs.update({'user': self.request.user})
         return kwargs
+    
+
+class ProfessoresView(ListView):
+    model = User
+    template_name = "main/professores.html"
+    context_object_name = "teachers"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        student = self.request.user
+        student_class = Class.objects.get(enrolled=student)
+        subjects = Subject.objects.filter(class_code=student_class)
+        context["subjects"] = subjects
+        return context
 
 
 class TestsView(ListView):
