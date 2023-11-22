@@ -61,7 +61,7 @@ class LancarAulaView(CreateView):
 
 class TestsView(ListView):
     model = Test
-    template_name = "main/avaliacoes.html"
+    template_name = "main/avaliacoes/avaliacoes.html"
     slug_field = "subject__slug"
     
     def get_context_data(self, **kwargs):
@@ -74,7 +74,7 @@ class TestsView(ListView):
 class AbrirAvaliacaoView(CreateView):
     model = Test
     form_class = TestForm
-    template_name = "main/abrir-avalicao.html"
+    template_name = "main/avaliacoes/abrir-avalicao.html"
 
     def get_success_url(self):
         return reverse_lazy("main:tests", kwargs={"slug": self.object.subject.slug})
@@ -135,58 +135,64 @@ class GradesView(DetailView):
     
 class EventosView(ListView):
     model = Event
-    template_name = "main/eventos.html"
+    template_name = "main/eventos/eventos.html"
     context_object_name = "events"
     
     
 class EventoView(DetailView):
     model = Event
-    template_name = "main/evento.html"
+    template_name = "main/eventos/evento.html"
     
     
 class CriarEvento(CreateView):
     model = Event
     fields = ['image', 'title', 'description', 'date_time']
-    template_name = "main/criar-evento.html"
+    template_name = "main/eventos/criar-evento.html"
     success_url = reverse_lazy("main:events")
     
 
 class EditarEvento(UpdateView):
     model = Event
     fields = ['image', 'title', 'description', 'date_time']
-    template_name = "main/criar-evento.html"
+    template_name = "main/eventos/criar-evento.html"
     success_url = reverse_lazy("main:events")
     
     
 class DeletarEvento(DeleteView):
     model = Event
-    template_name = "main/deletar-evento.html"
-    success_url = reverse_lazy("main:events")
+
+    def get(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        self.object.delete()
+        return redirect(self.get_success_url())
+
+    def get_success_url(self):
+        return reverse_lazy("main:events")
     
 
 class TurmasView(ListView):
     model = Class
-    template_name = "main/turmas.html"
+    template_name = "main/turmasturmas.html"
     context_object_name = "classes"
     
 
 class TurmaDetailView(DetailView):
     model = Class
-    template_name = "main/turma.html"
+    template_name = "main/turmasturma.html"
     context_object_name = "class"
     
     
 class TurmaUpdateView(UpdateView):
     model = Class
     fields = ['code', 'level', 'academic_year', 'enrolled']
-    template_name = "main/editar-turma.html"
+    template_name = "main/turmaseditar-turma.html"
     success_url = reverse_lazy("main:classes")
 
 
 class TurmaCreateView(CreateView):
     model = Class
     fields = ['code', 'level', 'academic_year']
-    template_name = "main/criar-turma.html"
+    template_name = "main/turmascriar-turma.html"
     success_url = reverse_lazy("main:classes")
 
 
