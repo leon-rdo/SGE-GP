@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block title %}SGE-GP | Criar Evento{% endblock title %}
+
+{% block head %}
+<style>
+    #id_description {
+        min-height: 100%;
+    }
+</style>
+{% endblock head %}
+
+{% block aside %}
+{% include "main/snippets/aside.html" %}
+{% endblock aside %}
+
+{% block content %}
+<div class="col-12 col-md-9">
+    <div class="row mb-2">
+        <div class="col-12 col-md-6">
+            <h1>{{ object.title }}</h1>
+            <p>{{ object.prompt|linebreaks }}</p>
+            <h6>Entrega em {{ object.delivery_date }}</h6>
+        </div>
+        <div class="col-12 col-md-6">
+            <img src="{{ object.image.url }}" class="img-fluid object-fit-contain">
+        </div>
+    </div>
+    <div class="row justify-content-between">
+        <div class="col-auto">
+            <a href="{% url 'main:activities' subject.slug %}" class="btn btn-success me-2" role="button"
+                style="height: min-content;">
+                <i class="bi bi-arrow-left"></i>
+                Voltar
+            </a>
+            <button type="button" class="btn btn-danger me-2" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                <i class="bi bi-trash"></i>
+                Excluir
+            </button>
+
+            <a href="{% url 'main:edit-activity' subject.slug object.pk %}" class="btn btn-warning me-2" role="button"
+                style="height: min-content;">
+                <i class="bi bi-pencil"></i>
+                Voltar
+            </a>
+
+            <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="deleteModalLabel">Confirmar Exclusão</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            Tem certeza de que deseja excluir este item?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                            <a href="{% url 'main:delete-activity' subject.slug object.pk %}" rol e="button"
+                                class="btn btn-danger">
+                                <i class="bi bi-trash"></i>
+                                Excluir
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

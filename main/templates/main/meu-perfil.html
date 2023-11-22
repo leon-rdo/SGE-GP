@@ -12,11 +12,23 @@
     <div class="col-8">
         <h3 class="text-success">Meu Perfil</h3>
         <hr>
-        <h1 class="text-success" style="text-transform: capitalize;">{{ user.type }}</h4>
+        <h1 class="text-success mb-3" style="text-transform: capitalize;">
+            {% if user.type == 'teacher' %}
+              Professor
+            {% elif user.type == 'coordinator' %}
+                Coordenador
+            {% elif user.type == 'guardian' %}
+                Responsável
+            {% else %}
+                Aluno
+            {% endif %}
+        </h1>
         <p><b>Nome:</b> {{ user }}</p>
-        <p><b>Data de Nascimento:</b> {{ user.birthdate }}16 de Maio de 2003</p>
-        <p><b>Idade:</b> {{ user.age }}20</p>
-        <a href="#" class="text-success">Deseja mudar algo? Clique aqui. </a>
+        {% if user.birthdate %}
+            <p><b>Data de Nascimento:</b> {{ user.birthdate }}</p>
+            <p><b>Idade:</b> {{ user.age }}</p>
+        {% endif %}
+        <a href="{% url 'user_update' %}" class="text-success">Deseja mudar algo? Clique aqui. </a>
     </div>
     <div class="col-4">
         <figure class="d-flex flex-column align-items-center">

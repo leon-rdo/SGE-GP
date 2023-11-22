@@ -1,9 +1,10 @@
-from django.urls import reverse_lazy
-from django.views.generic import TemplateView, ListView, DetailView, CreateView, UpdateView
-from .models import *
-from .forms import ClassroomForm, TestForm, GradeForm
-from django.shortcuts import redirect
 from django.contrib import messages
+from django.shortcuts import get_object_or_404, redirect
+from django.urls import reverse_lazy
+from django.views.generic import CreateView, DeleteView, DetailView, ListView, TemplateView, UpdateView
+
+from .forms import ClassroomForm, TestForm, GradeForm
+from .models import *
 
 
 class IndexView(TemplateView):
@@ -26,7 +27,6 @@ class DisciplinasView(ListView):
         return context
     
     
-
 class DesempenhoView(DetailView):
     model = Subject
     template_name = "main/desempenho.html"
@@ -45,17 +45,6 @@ class DesempenhoView(DetailView):
         context["absents"] = absents
 
         return context
-    
-
-
-class AtividadesView(ListView):
-    model = Activity
-    template_name = "main/atividades.html"
-    
-
-class AtividadeView(DetailView):
-    model = Activity
-    template_name = "main/atividade.html"
     
     
 class LancarAulaView(CreateView):
@@ -100,7 +89,6 @@ class AbrirAvaliacaoView(CreateView):
         context = super().get_context_data(**kwargs)
         context["subject"] = Subject.objects.get(slug=self.kwargs["slug"])
         return context
-    
     
 
 class GradesView(DetailView):
@@ -169,6 +157,12 @@ class EditarEvento(UpdateView):
     template_name = "main/criar-evento.html"
     success_url = reverse_lazy("main:events")
     
+    
+class DeletarEvento(DeleteView):
+    model = Event
+    template_name = "main/deletar-evento.html"
+    success_url = reverse_lazy("main:events")
+    
 
 class TurmasView(ListView):
     model = Class
@@ -196,3 +190,70 @@ class TurmaCreateView(CreateView):
     success_url = reverse_lazy("main:classes")
 
 
+class ActivityListView(ListView):
+    model = Activity
+    template_name = "main/atividades/activities.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        subject = Subject.objects.get(slug=self.kwargs["slug"])
+        context["subject"] = subject 
+        context["activities"] = Activity.objects.filter(subject=subject)
+        return context
+
+
+class ActivityDetailView(DetailView):
+    model = Activity
+    template_name = "main/atividades/activity.html"
+    context_object_name = "activity"
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["subject"] = Subject.objects.get(slug=self.kwargs["slug"])
+        return context
+
+
+class ActivityCreateView(CreateView):
+    model = Activity
+    fields = ['title', 'prompt', 'image', 'delivery_date']
+    template_name = "main/atividades/create-activity.html"
+    
+    def get_success_url(self):
+        return reverse_lazy("main:activities", kwargs={"slug": self.kwargs["slug"]})
+    
+    def form_valid(self, form):
+        subject_slug = self.kwargs['slug']
+        subject = get_object_or_404(Subject, slug=subject_slug)
+        form.instance.subject = subject
+        return super().form_valid(form)
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["subject"] = Subject.objects.get(slug=self.kwargs["slug"])
+        return context 
+
+
+class ActivityUpdateView(UpdateView):
+    model = Activity
+    fields = ['title', 'prompt', 'image', 'delivery_date']
+    template_name = "main/atividades/edit-activity.html"
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["subject"] = Subject.objects.get(slug=self.kwargs["slug"])
+        return context 
+
+    def get_success_url(self):
+        return reverse_lazy("main:activities", kwargs={"slug": self.kwargs["slug"]})
+
+
+class ActivityDeleteView(DeleteView):
+    model = Activity
+
+    def get(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        self.object.delete()
+        return redirect(self.get_success_url())
+
+    def get_success_url(self):
+        return reverse_lazy("main:activities", kwargs={"slug": self.kwargs["slug"]})

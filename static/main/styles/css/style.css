@@ -21,6 +21,10 @@ h2 {
   background-color: #7cdc7d;
 }
 
+.bg-light-green:hover {
+  background-color: #3bb03d60;
+}
+
 .bg-dark-green {
   background-color: #105f26;
   color: white;

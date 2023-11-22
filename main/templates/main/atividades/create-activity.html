@@ -1,0 +1,50 @@
+{# title prompt image delivery_date #}
+{% extends "base.html" %}
+
+{% block title %}SGE-GP | Criar Evento{% endblock title %}
+
+{% block head %}
+<style>
+    #id_prompt {
+        min-height: 10rem;
+    }
+</style>
+{% endblock head %}
+
+{% block aside %}
+    {% include "main/snippets/aside.html" %}
+{% endblock aside %}
+
+{% block content %}
+<div class="col-12 col-md-9">
+    <h1 class="text-center">Criar Atividade</h1>
+    <form method="post" enctype="multipart/form-data" class="row justify-content-center">
+        {% csrf_token %}
+        {% load widget_tweaks %}
+        <div class="col-12 col-md-6">
+            <label class="form-label fw-bold" for="{{ form.image.id_for_label }}">{{ form.image.label }}:</label><br>
+            {% render_field form.image placeholder=form.image.label required=True class="form-control" %}
+            <div class="form-floating my-3">
+                {% render_field form.title placeholder=form.title.label required=True class="form-control" %}
+                <label for="{{ form.title.id_for_label }}">{{ form.title.label }}</label>
+            </div>
+            <div class="form-floating my-3">
+                {% render_field form.prompt placeholder=form.prompt.label required=True class="form-control" %}
+                <label for="{{ form.prompt.id_for_label }}">{{ form.prompt.label }}</label>
+            </div>
+            <div class="form-floating mb-3">
+                {% render_field form.delivery_date placeholder=form.delivery_date.label required=True class="form-control" type='date' %}
+                <label for="{{ form.delivery_date.id_for_label }}">{{ form.delivery_date.label }}</label>
+            </div>
+        </div>
+
+        <div class="col-12 d-flex justify-content-center mt-3">
+            <a href="{% url 'main:activities' subject.slug %}" class="btn btn-success me-2" role="button" style="height: min-content;">
+                <i class="bi bi-arrow-left"></i>
+                Voltar
+            </a>
+            <button type="submit" class="btn btn-success">Criar</button>
+        </div>
+    </form>
+</div>
+{% endblock content %}
