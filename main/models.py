@@ -92,13 +92,9 @@ class Classroom(models.Model):
 class Test(models.Model):
     TESTS = (
         ("1", "1ª Avaliação"),
-        ("1R", "Recuperação 1"),
         ("2", "2ª Avaliação"),
-        ("2R", "Recuperação 2"),
         ("3", "3ª Avaliação"),
-        ("3R", "Recuperação 3"),
         ("4", "4ª Avaliação"),
-        ("4R", "Recuperação 4"),
         ("PF", "Prova Final"),
     )
 

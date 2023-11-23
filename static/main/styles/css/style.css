@@ -163,7 +163,7 @@ h2 {
 }
 
 .card-assessment {
-  min-height: 25rem;
+  aspect-ratio: 1/1;
 }
 
 .card-frequency {

@@ -42,11 +42,22 @@ class DesempenhoView(LoginRequiredMixin, UserPassesTestMixin, DetailView):
         grades = Grade.objects.filter(student=self.request.user, test__subject=self.get_object())
         grades_dict = {grade.test.school_test: grade for grade in grades}
         context["grades"] = grades_dict
+        
+        # Step 1 & 2: Calculate the average of the first 4 grades
+        average = sum(grades_dict[grade].grade for grade in ['1', '2', '3', '4']) / 4
 
-        # Obter todas as aulas da disciplina
+        # Step 3: Check if there is a final exam grade
+        if 'PF' in grades_dict:
+            # Step 4: Add the final exam grade to the average and divide by 2
+            average = (average + grades_dict['PF'].grade) / 2
+
+        # Step 5: Store the result in the variable 'average'
+        context["average"] = average
+
+        # Get all the lessons of the subject
         lessons = Classroom.objects.filter(subject=self.get_object())
 
-        # Obter as faltas do aluno
+        # Get the student's absences
         absents = [lesson for lesson in lessons if self.request.user not in lesson.attendance_list.all()]
         context["absents"] = absents
 
