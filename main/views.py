@@ -43,6 +43,7 @@ class DesempenhoView(LoginRequiredMixin, UserPassesTestMixin, DetailView):
         grades_dict = {grade.test.school_test: grade for grade in grades}
         context["grades"] = grades_dict
         
+        # Calcula a média do aluno
         # Passo 1: Verifique se todas as notas estão presentes
         if all(grade in grades_dict for grade in ['1', '2', '3', '4']):
             # Passo 2: Calcule a média das primeiras 4 notas
@@ -141,7 +142,7 @@ class AbrirAvaliacaoView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
 
 class GradesView(LoginRequiredMixin, UserPassesTestMixin, DetailView):
     model = Test
-    template_name = "main/notas.html"
+    template_name = "main/avaliacoes/notas.html"
     
     def test_func(self):    
         teacher = get_object_or_404(Test, pk=self.kwargs['pk']).subject.teacher
