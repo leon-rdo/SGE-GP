@@ -102,7 +102,7 @@
     {% endblock container %}
     
 
-    <footer class="mt-5">
+    <footer class="{% if request.resolver_match.url_name != 'index' %}mt-5{% endif %}">
         <nav class="navbar bg-dark" data-bs-theme="dark">
             <div class="container-fluid justify-content-center">
                 <img src="{% static 'main/icons/CEGP.svg' %}" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">

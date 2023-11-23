@@ -120,9 +120,14 @@ h2 {
   color: #21561A;
 }
 
+
+#ondas-container {
+  z-index: -2;
+}
+
 @media (min-width: 768px) {
   .h-100vh {
-    min-height: 70vh;
+    min-height: 65vh;
   }
 
   .dark-green-bg {
@@ -131,6 +136,16 @@ h2 {
 }
 
 @media (min-width: 992px) {
+  .h-100vh {
+    min-height: 80vh;
+  }
+
+  .dark-green-bg {
+    background-color: #105f26;
+  }
+}
+
+@media (min-width: 1200px) {
   .h-100vh {
     min-height: 100vh;
   }
