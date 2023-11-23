@@ -8,6 +8,7 @@
 
 {% block content %}
 <div class="col-12 col-md-9">
+    {% if user.type == 'student' %}
     <h1>Meus Professores</h1>
     <ul class="list-group my-3">
         {% for subject in subjects %}
@@ -26,6 +27,18 @@
         <h1 class="display-3">Você ainda não tem professores!</h1>
         {% endfor %}
     </ul>
+    {% else %}
+    <h1>Professores</h1>
+    <ul class="list-group my-3">
+        {% for teacher in teachers %}
+        <li class="list-group-item bg-dark-green fs-5">
+            {{ teacher }}
+        </li>
+        {% empty %}
+        <h1 class="display-3">Não há professores registrados!</h1>
+        {% endfor %}
+    </ul>
+    {% endif %}
     <a href="{% url 'main:subjects' %}" class="btn bg-light-green" role="button"
         style="height: min-content;">
         <i class="bi bi-arrow-left"></i>
