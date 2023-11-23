@@ -43,16 +43,18 @@ class DesempenhoView(LoginRequiredMixin, UserPassesTestMixin, DetailView):
         grades_dict = {grade.test.school_test: grade for grade in grades}
         context["grades"] = grades_dict
         
-        # Step 1 & 2: Calculate the average of the first 4 grades
-        average = sum(grades_dict[grade].grade for grade in ['1', '2', '3', '4']) / 4
+        # Passo 1: Verifique se todas as notas estão presentes
+        if all(grade in grades_dict for grade in ['1', '2', '3', '4']):
+            # Passo 2: Calcule a média das primeiras 4 notas
+            average = sum(grades_dict[grade].grade for grade in ['1', '2', '3', '4']) / 4
 
-        # Step 3: Check if there is a final exam grade
-        if 'PF' in grades_dict:
-            # Step 4: Add the final exam grade to the average and divide by 2
-            average = (average + grades_dict['PF'].grade) / 2
+            # Passo 3: Verifique se há uma nota para a prova final
+            if 'PF' in grades_dict:
+                # Passo 4: Adicione a nota da prova final à média calculada e divida por 2
+                average = (average + grades_dict['PF'].grade) / 2
 
-        # Step 5: Store the result in the variable 'average'
-        context["average"] = average
+            # Passo 5: Armazene o resultado na variável 'average'
+            context["average"] = average
 
         # Get all the lessons of the subject
         lessons = Classroom.objects.filter(subject=self.get_object())
