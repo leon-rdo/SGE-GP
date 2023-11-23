@@ -62,3 +62,12 @@
     </form>
 </div>
 {% endblock content %}
+
+{% block script %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var formattedDate = "{{ form.date_time.value|date:'Y-m-d H:i:s' }}";
+        document.getElementById('id_date_time').value = formattedDate;
+    });
+</script>
+{% endblock script %}

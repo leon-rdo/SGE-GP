@@ -131,7 +131,7 @@ class GradesView(LoginRequiredMixin, UserPassesTestMixin, DetailView):
     template_name = "main/notas.html"
     
     def test_func(self):    
-        teacher = get_object_or_404(Subject, slug=self.kwargs['slug']).teacher
+        teacher = get_object_or_404(Test, pk=self.kwargs['pk']).subject.teacher
         return self.request.user == teacher or self.request.user.type == "coordinator"
 
     def get_success_url(self):
@@ -220,7 +220,7 @@ class DeletarEvento(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
 class TurmasView(LoginRequiredMixin, UserPassesTestMixin, ListView):
     model = Class
-    template_name = "main/turmasturmas.html"
+    template_name = "main/turmas/turmas.html"
     context_object_name = "classes"
     
     def test_func(self):    
@@ -229,7 +229,7 @@ class TurmasView(LoginRequiredMixin, UserPassesTestMixin, ListView):
 
 class TurmaDetailView(LoginRequiredMixin, UserPassesTestMixin, DetailView):
     model = Class
-    template_name = "main/turmasturma.html"
+    template_name = "main/turmas/turma.html"
     context_object_name = "class"
     
     def test_func(self):    
@@ -239,7 +239,7 @@ class TurmaDetailView(LoginRequiredMixin, UserPassesTestMixin, DetailView):
 class TurmaUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Class
     fields = ['code', 'level', 'academic_year', 'enrolled']
-    template_name = "main/turmaseditar-turma.html"
+    template_name = "main/turmas/editar-turma.html"
     success_url = reverse_lazy("main:classes")
     
     def test_func(self):    
@@ -249,7 +249,7 @@ class TurmaUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 class TurmaCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     model = Class
     fields = ['code', 'level', 'academic_year']
-    template_name = "main/turmascriar-turma.html"
+    template_name = "main/turmas/criar-turma.html"
     success_url = reverse_lazy("main:classes")
     
     def test_func(self):    

@@ -62,8 +62,6 @@
     document.addEventListener('DOMContentLoaded', function() {
         var formattedDate = "{{ form.birthdate.value|date:'Y-m-d' }}";
         document.getElementById('id_birthdate').value = formattedDate;
-        console.log(formattedDate);
-        console.log(document.getElementById('id_birthdate'));
     });
 </script>
 {% endblock extra_body %}

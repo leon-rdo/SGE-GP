@@ -33,8 +33,8 @@
                 <label for="{{ form.prompt.id_for_label }}">{{ form.prompt.label }}</label>
             </div>
             <div class="form-floating mb-3">
-                {% render_field form.delivery_date placeholder=form.delivery_date.label required=True class="form-control" type='date' %}
-                <label for="{{ form.delivery_date.id_for_label }}">{{ form.delivery_date.label }}</label>
+                {% render_field form.delivery_date placeholder=form.delivery_date.label required=True class="form-control" type='date' id='id_delivery_date' %}
+                <label for="id_delivery_date">{{ form.delivery_date.label }}</label>
             </div>
         </div>
 
@@ -48,3 +48,12 @@
     </form>
 </div>
 {% endblock content %}
+
+{% block script %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var formattedDate = "{{ form.delivery_date.value|date:'Y-m-d' }}";
+        document.getElementById('id_delivery_date').value = formattedDate;
+    });
+</script>
+{% endblock script %}

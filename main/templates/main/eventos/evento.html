@@ -3,7 +3,7 @@
 {% block title %}SGE-GP | Eventos{% endblock title %}
 
 {% block aside %}
- {% include "main/snippets/aside.html" %}
+{% include "main/snippets/aside.html" %}
 {% endblock aside %}
 
 {% block content %}
@@ -12,20 +12,47 @@
         <div class="col-12 col-md-6 fs-4">
             <h1>{{ object.title }}</h1>
             <p>{{ object.description|linebreaks }}</p>
-            <p><small class="text-muted">{{ object.date_time }}</small></p>
+            <p><small class="fw-bold">Data: {{ object.date_time }}</small></p>
         </div>
         <div class="col-12 col-md-6">
             <img src="{{ object.image.url }}" class="img-fluid object-fit-contain">
         </div>
         <div class="col-12">
-            <a href="{% url 'main:events' %}" class="btn btn-success btn-sm" role="button" style="height: min-content;">
+            <a href="{% url 'main:events' %}" class="btn btn-success btn-sm me-1" role="button">
                 <i class="bi bi-arrow-left"></i>
                 Voltar
             </a>
             {% if user.type == 'coordinator' %}
-              <a href="{% url 'main:edit-event' object.pk %}" class="btn btn-success btn-sm">
+            <button type="button" class="btn btn-sm btn-danger me-1" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                <i class="bi bi-trash"></i>
+                Excluir
+            </button>
+            <a href="{% url 'main:edit-event' object.pk %}" class="btn btn-sm btn-warning me-1" role="button">
+                <i class="bi bi-pencil"></i>
                 Editar
-              </a>
+            </a>
+            <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="deleteModalLabel">Confirmar Exclusão</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            Tem certeza de que deseja excluir este evento?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                            <a href="{% url 'main:delete-event' object.pk %}" role="button"
+                                class="btn btn-danger">
+                                <i class="bi bi-trash"></i>
+                                Excluir
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
             {% endif %}
         </div>
     </div>
