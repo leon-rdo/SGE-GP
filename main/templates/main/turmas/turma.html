@@ -9,14 +9,25 @@
 {% block content %}
 <div class="col-12 col-md-9">
   <div class="row g-2">
-    <div class="col-12 col-md-6 fs-4">
+    <div class="col-12 fs-5">
       <h1>{{ object }}</h1>
       <h3>Matriculados</h3>
-      <ul class="list-group list-group-flush">
-        {% for student in object.enrolled.all %}
-        <li class="list-group-item bg-transparent">{{ student }}</li>
-        {% endfor %}
-      </ul>
+      <table class="table table-success table-hover table-striped border border-success">
+        <thead class="border-start border-success">
+          <tr>
+            <th scope="col" class="border border-success">Nome do Estudante</th>
+            <th scope="col">Código de Matrícula</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for student in object.enrolled.all %}
+          <tr>
+            <td>{{ student }}</td>
+            <td class="border-start border-success">{{ student.code }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
     </div>
     <div class="col-12">
       <a href="{% url 'main:classes' %}" class="btn btn-success btn-sm me-1" role="button" style="height: min-content;">
