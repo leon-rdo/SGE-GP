@@ -289,7 +289,9 @@ class ActivityDetailView(LoginRequiredMixin, DetailView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["subject"] = Subject.objects.get(slug=self.kwargs["slug"])
+        subject = Subject.objects.get(slug=self.kwargs["slug"])
+        context["subject"] = subject
+        context["has_permition"] = self.request.user == subject.teacher or self.request.user.type == "coordinator"
         return context
 
 
