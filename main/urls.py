@@ -8,6 +8,7 @@ urlpatterns = [
     path("disciplinas/", DisciplinasView.as_view(), name="subjects"),
     path("disciplinas/<int:pk>/desempenho/", DesempenhoView.as_view(), name="performance"),
     path("lancar-aula/", LancarAulaView.as_view(), name="launch-class"),
+    path('get_students_for_subject/', get_students_for_subject, name='get_students_for_subject'),
     path("professores/", ProfessoresView.as_view(), name="teachers"),
     # Avaliações
     path("avaliacoes/<str:slug>", TestsView.as_view(), name="tests"),

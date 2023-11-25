@@ -30,17 +30,10 @@
     {% csrf_token %}
     {% load widget_tweaks %}
     <div class="col-12 col-md-6">
-      <div class="input-group">
         <div class="form-floating mb-3">
           {% render_field form.subject placeholder=form.subject.label required=True class="form-control" %}
           <label for="{{ form.subject.id_for_label }}">{{ form.subject.label }}</label>
         </div>
-
-        <div class="form-floating mb-3">
-          {% render_field form.class_code placeholder=form.class_code.label required=True class="form-control" %}
-          <label for="{{ form.class_code.id_for_label }}">{{ form.class_code.label }}</label>
-        </div>
-      </div>
 
       <div class="form-floating mb-3">
         {% render_field form.date placeholder=form.date.label required=True class="form-control" %}
@@ -76,3 +69,33 @@
   </form>
 </div>
 {% endblock content %}
+
+{% block script %}
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script>
+$(document).ready(function() {
+  select_subject = '<option>Selecione uma disciplina...</option>'
+  $("#id_attendance_list").html(select_subject);
+
+  $('#id_subject').change(function() {
+    var subjectId = $(this).val();
+
+    $("#id_attendance_list").html(select_subject);
+
+    $.ajax({
+      url: "{% url 'main:get_students_for_subject' %}",
+      data: {
+        'subject': subjectId
+      },
+      success: function(data) {
+        var options = '';
+        for (var i = 0; i < data.length; i++) {
+          options += '<option value="' + data[i].id + '">' + data[i].name + '</option>';
+        }
+        $("#id_attendance_list").html(options);
+      }
+    });
+  });
+});
+</script>
+{% endblock script %}

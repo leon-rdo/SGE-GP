@@ -1,5 +1,7 @@
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.db.models import Q
+from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DeleteView, DetailView, ListView, TemplateView, UpdateView
@@ -69,7 +71,14 @@ class DesempenhoView(LoginRequiredMixin, UserPassesTestMixin, DetailView):
     def test_func(self):    
         return self.request.user.type == "student"
     
-    
+
+def get_students_for_subject(request):
+    subject = Subject.objects.get(id=request.GET.get('subject', None))
+    students = subject.class_code.enrolled.all() | subject.academic_probation.all()
+    student_list = [{'id': student.id, 'name': str(student)} for student in students]
+    return JsonResponse(student_list, safe=False)
+
+
 class LancarAulaView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     model = Classroom
     form_class = ClassroomForm

@@ -20,7 +20,7 @@ class Subject(models.Model):
         super().save(*args, **kwargs)
 
     def __str__(self):
-        return self.name
+        return self.name + " - " + str(self.class_code)
 
     class Meta:
         verbose_name = "Disciplina"

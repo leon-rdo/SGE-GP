@@ -3,31 +3,52 @@
 {% block title %}SGE-GP | Disciplinas{% endblock title %}
 
 {% block aside %}
- {% include "main/snippets/aside.html" %}
+  {% include "main/snippets/aside.html" %}
 {% endblock aside %}
 
 {% block content %}
 <div class="col-9">
   <h1 class="d-md-none">Disciplinas</h1>
+  <div class="col-12 col-sm-8 col-lg-4">
+    <div class="input-group">
+      <span class="input-group-text bg-dark-green text-light" id="basic-addon1"><i class="bi bi-search"></i></span>
+      <input type="text" id="search-subject" class="form-control" placeholder="Por nome...">
+    </div>
+    <div class="input-group mb-3">
+      <span class="input-group-text bg-dark-green text-light" id="basic-addon1"><i class="bi bi-search"></i></span>
+      <input type="text" id="search-class" class="form-control" placeholder="Por turma...">
+    </div>
+  </div>
   <div class="row {% if subjects %}row-cols-1 row-cols-md-2 row-cols-lg-4{% endif %} g-2">
-    {% for subject in subjects %}      
-    <div class="col">
+    {% for subject in subjects %}
+    <div class="col" data-id="{{ subject.name }}" data-class="{{ subject.class_code }}">
       <div class="card card-subject ratio ratio-1x1 rounded-4 bg-light-green">
         <div class="card-body d-flex flex-column justify-content-center text-center">
-          <h4 class="card-title text-dark-green fw-bold mb-4">{{ subject.name }}</h4>
+          <h4 class="card-title text-dark-green fw-bold">{{ subject.name }}</h4>
+          {% if user.type != 'student' %}
+          <p class="card-text text-dark-green">{{ subject.class_code }}</p>
+          {% else %}
+          <hr class='mt-1'>
+          {% endif %}
           <div class="d-flex w-100">
             {% if user.type == 'teacher' or user.type == 'coordinator' %}
-            <a href="{% url 'main:tests' subject.slug %}" class="btn bg-dark-green w-50 fw-bold rounded-4 me-2 d-flex flex-column align-items-center justify-content-center" role="button">
+            <a href="{% url 'main:tests' subject.slug %}"
+              class="btn bg-dark-green w-50 fw-bold rounded-4 me-2 d-flex flex-column align-items-center justify-content-center"
+              role="button">
               <i class="bi bi-file-earmark-bar-graph fs-1"></i>
               <span>Avaliações</span>
             </a>
             {% else %}
-            <a href="{% url 'main:performance' subject.pk %}" class="btn bg-dark-green w-50 fw-bold rounded-4 me-2 d-flex flex-column align-items-center justify-content-center" role="button">
+            <a href="{% url 'main:performance' subject.pk %}"
+              class="btn bg-dark-green w-50 fw-bold rounded-4 me-2 d-flex flex-column align-items-center justify-content-center"
+              role="button">
               <i class="bi bi-file-earmark-bar-graph fs-1"></i>
               <span>Desempenho</span>
             </a>
             {% endif %}
-            <a href="{% url 'main:activities' subject.slug  %}" class="btn bg-dark-green w-50 fw-bold rounded-4 d-flex flex-column align-items-center justify-content-center" role="button">
+            <a href="{% url 'main:activities' subject.slug  %}"
+              class="btn bg-dark-green w-50 fw-bold rounded-4 d-flex flex-column align-items-center justify-content-center"
+              role="button">
               <i class="bi bi-file-earmark-text fs-1"></i>
               <span>Atividades</span>
             </a>
@@ -41,3 +62,21 @@
   </div>
 </div>
 {% endblock content %}
+
+{% block script %}
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script>
+  $(document).ready(function () {
+    $('#search-subject, #search-class').on('keyup', function () {
+      var subjectInput = $('#search-subject').val().toLowerCase();
+      var classInput = $('#search-class').val().toLowerCase();
+
+      $('.row .col').filter(function () {
+        var subjectName = $(this).data('id').toLowerCase();
+        var className = $(this).data('class').toLowerCase();
+        $(this).toggle(subjectName.indexOf(subjectInput) > -1 && className.indexOf(classInput) > -1);
+      });
+    });
+  });
+</script>
+{% endblock script %}
