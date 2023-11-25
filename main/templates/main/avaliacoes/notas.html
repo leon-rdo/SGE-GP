@@ -3,7 +3,7 @@
 {% block title %}SGE-GP | Notas{% endblock title %}
 
 {% block aside %}
-{% include "main/snippets/aside.html" %}
+  {% include "main/snippets/aside.html" %}
 {% endblock aside %}
 
 {% block content %}
@@ -43,24 +43,4 @@
     </div>
   </div>
 </div>
-<!--
-{% for student in object.subject.class_code.enrolled.all %}
-  <tr>
-    <td>{{ student }}</td>
-      <td>
-        {% for grade in student.grade_set.all %}
-          {% if grade.test.id == object.id %}
-            {{ grade.grade }}
-          {% else %}
-            {% if forloop.last %}
-              -                          
-            {% endif %}
-          {% endif %}
-        {% empty %}
-          -
-        {% endfor %}
-      </td>
-  </tr>
-{% endfor %}
--->
 {% endblock content %}
