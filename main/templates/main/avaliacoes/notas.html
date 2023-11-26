@@ -3,7 +3,7 @@
 {% block title %}SGE-GP | Notas{% endblock title %}
 
 {% block aside %}
-  {% include "main/snippets/aside.html" %}
+{% include "main/snippets/aside.html" %}
 {% endblock aside %}
 
 {% block content %}
@@ -24,21 +24,21 @@
           </thead>
           <tbody>
             {% for student, form in student_form_pairs %}
-              <tr>
-                <td>{{ student }}</td>
-                  <td>
-                    <input type="number" name="{{ student.id }}-grade" value="{{ form.grade.value|default_if_none:'' }}" min="0" max="10" step="any" id="{{ form.grade.auto_id }}" class="form-control" style="width: 5rem;">
-                  </td>
-              </tr>
+            <tr>
+              <td>{{ student }}</td>
+              <td>
+                <input type="number" name="{{ student.id }}-grade" value="{{ form.grade.value|default_if_none:'' }}" min="0" max="10" step="0.1" id="{{ form.grade.auto_id }}" class="form-control" style="width: 5.4rem;">
+              </td>
+            </tr>
             {% endfor %}
           </tbody>
         </table>
         <a href="{% url 'main:tests' object.subject.slug %}" class="btn bg-dark-green" role="button"
-        style="height: min-content;">
-        <i class="bi bi-arrow-left"></i>
-        Voltar
-      </a>
-      <input class="btn bg-dark-green" type="submit" value="Enviar notas">
+          style="height: min-content;">
+          <i class="bi bi-arrow-left"></i>
+          Voltar
+        </a>
+        <input class="btn bg-dark-green" type="submit" value="Enviar notas">
       </form>
     </div>
   </div>

@@ -166,8 +166,9 @@ class GradesView(LoginRequiredMixin, UserPassesTestMixin, DetailView):
         student_form_pairs = []
         for student in students:
             grade = student.grade_set.filter(test=self.object).first()
-            if grade is None:
-                grade = Grade(student=student, test=self.object)
+            if grade is not None:
+                grade.grade = str(grade.grade).replace(',', '.')
+                grade.save()
             form = GradeForm(instance=grade)
             student_form_pairs.append((student, form))
         context['student_form_pairs'] = student_form_pairs
