@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}SGE-GP | 404{% endblock title %}
+
+{% block content %}
+<div class="col-12 d-flex justify-content-center align-items-center text-center h-100vw">
+    <div>
+        <h2 class="text-secondary m-2">ERRO 404</h2>
+        <h1 class="display-3 m-2">Página não encontrada!</h1>
+        <p class="fs-4 m-2">A página que você está tentando acessar não existe ou não está disponível.</p>
+        <a href="{% url 'main:index' %}" class="btn btn-success btn-lg mt-5 mt-md-3">Início</a>
+    </div>
+</div>
+{% endblock content %}

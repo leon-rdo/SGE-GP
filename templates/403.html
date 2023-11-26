@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}SGE-GP | 403{% endblock title %}
+
+{% block content %}
+<div class="col-12 d-flex justify-content-center align-items-center text-center h-100vw">
+    <div>
+        <h2 class="text-secondary m-2">ERRO 403</h2>
+        <h1 class="display-3 m-2">PROIBIDO</h1>
+        <p class="fs-4 m-2">Você não tem permissão para acessar esta página.</p>
+        <a href="{% url 'main:index' %}" class="btn btn-success btn-lg mt-5">Início</a>
+    </div>
+</div>
+{% endblock content %}
