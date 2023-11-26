@@ -30,8 +30,11 @@ class DisciplinasView(LoginRequiredMixin, ListView):
             context["subjects"] = Subject.objects.filter(teacher=self.request.user)
         elif self.request.user.type == "student":
             student = self.request.user
-            student_class = Class.objects.get(enrolled=student)
-            context["subjects"] = Subject.objects.filter(class_code=student_class)
+            try:
+                student_class = Class.objects.get(enrolled=student)
+                context["subjects"] = Subject.objects.filter(class_code=student_class)
+            except Class.DoesNotExist:
+                context["subjects"] = None
         return context
     
     
@@ -103,9 +106,13 @@ class ProfessoresView(LoginRequiredMixin, ListView):
         if self.request.user.type == "coordinator" or self.request.user.type == "teacher":
             context["teachers"] = User.objects.filter(type="teacher")
         else:
-            student_class = Class.objects.get(enrolled=self.request.user)
-            subjects = Subject.objects.filter(class_code=student_class)
-            context["subjects"] = subjects
+            try:
+                student_class = Class.objects.get(enrolled=self.request.user)
+                subjects = Subject.objects.filter(class_code=student_class)
+                context["subjects"] = subjects
+            except Class.DoesNotExist:
+                context["subjects"] = None
+
         return context
 
 
