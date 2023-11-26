@@ -70,7 +70,7 @@ h2 {
 .btn:hover {
   background-color: #fff7e0;
   color: #105f26;
-  border: 0;
+  border: 1px solid #105f26;
   transform: scale(0.98);
 }
 

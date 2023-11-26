@@ -9,14 +9,16 @@
 {% block content %}
 <div class="col-9">
   <h1 class="d-md-none">Disciplinas</h1>
-  <div class="col-12 col-sm-8 col-lg-4">
-    <div class="input-group">
-      <span class="input-group-text bg-dark-green text-light" id="basic-addon1"><i class="bi bi-search"></i></span>
-      <input type="text" id="search-subject" class="form-control" placeholder="Por nome...">
-    </div>
-    <div class="input-group mb-3">
-      <span class="input-group-text bg-dark-green text-light" id="basic-addon1"><i class="bi bi-search"></i></span>
-      <input type="text" id="search-class" class="form-control" placeholder="Por turma...">
+  <div class="col-12 col-sm-8 my-3">
+    <div class="d-md-flex align-items-center justify-content-between">
+      <div class="input-group me-1">
+        <span class="input-group-text bg-dark-green text-light" id="basic-addon1"><i class="bi bi-search"></i></span>
+        <input type="text" id="search-subject" class="form-control" placeholder="Por nome...">
+      </div>
+      <div class="input-group">
+        <span class="input-group-text bg-dark-green text-light" id="basic-addon1"><i class="bi bi-search"></i></span>
+        <input type="text" id="search-class" class="form-control" placeholder="Por turma...">
+      </div>
     </div>
   </div>
   <div class="row {% if subjects %}row-cols-1 row-cols-md-2 row-cols-lg-4{% endif %} g-2">
