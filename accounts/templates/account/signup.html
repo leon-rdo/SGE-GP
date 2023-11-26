@@ -1,51 +1,133 @@
 {% extends 'account/base.html' %}
 {% load widget_tweaks %}
 
-{% load i18n %}
 
-{% block head_title %}
-{% trans 'Signup' %}
+{% block head_title %}Cadastre-se{% endblock %}
+
+{% block extra_head %}
+<style>
+@media (max-width: 1199.98px) {
+    .form-floating-w-100, .input-group-text-w-100 {
+      width: 100%!important;
+      border-radius: 0;
+      border: 0;
+    }
+    .input-group-w-100 {
+      border: 1px solid #ced4da;
+      border-radius: 0.5rem;
+      overflow: hidden;
+    }
+  }
+</style>
 {% endblock %}
 
 {% block content %}
-<h1 class="fw-bold">Inscreva-se</h1>
+<div class="col-12 py-4 py-md-0">
+    
+  <h1 class="display-6 text-center fw-bold">Cadastre-se</h1>
 
-<p>
-  Já tem uma conta? Então, por favor, <a href="{{ login_url }}" class="links">faça login</a>.
-</p>
+  <p class="text-center">
+    Ou se já tem uma conta, por favor, <a href="{% url 'account_login' %}" class="links">faça login</a>.
+  </p>
 
-<form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
-  {% csrf_token %}
+  <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
+    {% csrf_token %}
 
-  {{ form.non_field_errors|safe }}
-  <input type="hidden" name="remember" value="true" />
-  <div>
-    <div class="form-floating">
-      {{ form.username.errors|safe }}
-      {% render_field form.username placeholder="username" id="username" name="username" type="text" autocomplete="username" required=True class="form-control mb-2" %}
-      <label for="username" class="floatingInput">Nome de Usuário</label>
+    {{ form.non_field_errors|safe }}
+    <input type="hidden" name="remember" value="true" />
+    <div>
+      <div class="input-group mb-3">
+        <span class="input-group-text" id="addon-wrapping">@</span>
+        <div class="form-floating">
+          {{ form.username.errors|safe }}
+          {% render_field form.username placeholder="username" id="username" name="username" type="text" autocomplete="username" required=True class="form-control" %}
+          <label for="username" class="floatingInput">Nome de Usuário</label>
+        </div>
+      </div>
+      <div class="input-group input-group-w-100 flex-column flex-md-row mb-3">
+        <span class="input-group-text input-group-text-w-100 justify-content-center" id="addon-wrapping">
+          <i class="bi bi-person"></i>
+        </span>
+        <div class="form-floating form-floating-w-100">
+          {{ form.first_name.errors|safe }}
+          {% render_field form.first_name placeholder="Primeiro nome" id="first_name" name="first_name" type="text" autocomplete="first_name" required=True class="form-control" %}
+          <label for="first_name" class="floatingInput">Primeiro nome</label>
+        </div>
+        <div class="form-floating form-floating-w-100">
+          {{ form.middle_name.errors|safe }}
+          {% render_field form.middle_name placeholder="Nome do meio" id="middle_name" name="middle_name" type="text" autocomplete="middle_name" required=True class="form-control" %}
+          <label for="middle_name" class="floatingInput">Nome do meio</label>
+        </div>
+        <div class="form-floating form-floating-w-100">
+          {{ form.last_name.errors|safe }}
+          {% render_field form.last_name placeholder="Último nome" id="last_name" name="last_name" type="text" autocomplete="last_name" required=True class="form-control" %}
+          <label for="last_name" class="floatingInput">Último nome</label>
+        </div>
+      </div>
+      
+      <div class="input-group mb-3">
+        <span class="input-group-text" id="addon-wrapping">
+          <i class="bi bi-envelope"></i>
+        </span>
+        <div class="form-floating">
+          {{ form.email.errors|safe }}
+          {% render_field form.email placeholder="email" id="email" name="email" type="email" autocomplete="email" required=True class="form-control" %}
+          <label for="id_email" class="floatingInput">E-mail</label>
+        </div>
+      </div>
+
+      <div class="input-group mb-3">
+        <span class="input-group-text" id="addon-wrapping">
+          <i class="bi bi-calendar"></i>
+        </span>
+        <div class="form-floating">
+          {{ form.birthdate.errors|safe }}
+          {% render_field form.birthdate placeholder="birthdate" id="id_birthdate" name="birthdate" type="date" autocomplete="birthdate" class="form-control" %}
+          <label for="id_birthdate" class="floatingInput">Aniversário</label>
+        </div>
+      </div>
+
+      <div class="input-group mb-3">
+        <span class="input-group-text" id="addon-wrapping">
+          <i class="bi bi-gender-ambiguous"></i>
+        </span>
+        <div class="form-floating">
+          {{ form.gender.errors|safe }}
+          {% render_field form.gender placeholder="gender" id="id_gender" name="gender" autocomplete="gender" class="form-control" %}
+          <label for="id_gender" class="floatingInput">Gênero</label>
+        </div>
+      </div>
+
+      <div class="input-group mb-3">
+        <span class="input-group-text" id="addon-wrapping">
+          <i class="bi bi-lock"></i>
+        </span>
+        <div class="form-floating">
+          {{ form.password1.errors|safe }}
+          {% render_field form.password1 placeholder="password1" id="id_password1" name="password1" type="password" autocomplete="password1" required=True class="form-control" %}
+          <label for="id_password1" class="floatingInput">Senha</label>
+        </div>
+      </div>
+      <div class="input-group mb-3">
+        <span class="input-group-text" id="addon-wrapping">
+          <i class="bi bi-lock"></i>
+        </span>
+        <div class="form-floating">
+          {{ form.password2.errors|safe }}
+          {% render_field form.password2 placeholder="password2" id="id_password2" name="password2" type="password" autocomplete="password2" required=True class="form-control" %}
+          <label for="id_password2" class="floatingInput">Confirma senha</label>
+        </div>
+      </div>
+
     </div>
-    <div class="form-floating">
-      {{ form.email.errors|safe }}
-      {% render_field form.email placeholder="email" id="email" name="email" type="email" autocomplete="email" required=True class="form-control mb-2" %}
-      <label for="id_email" class="floatingInput">Email</label>
-    </div>
-    <div class="form-floating">
-      {{ form.password1.errors|safe }}
-      {% render_field form.password1 placeholder="password1" id="id_password1" name="password1" type="password" autocomplete="password1" required=True class="form-control mb-2" %}
-      <label for="id_password1" class="floatingInput">Senha</label>
-    </div>
-    <div class="form-floating">
-      {{ form.password2.errors|safe }}
-      {% render_field form.password2 placeholder="password2" id="id_password2" name="password2" type="password" autocomplete="password2" required=True class="form-control" %}
-      <label for="id_password2" class="floatingInput">Confirma senha</label>
-    </div>
-  </div>
 
 
-  {% if redirect_field_value %}
-  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-  {% endif %}
-  <button type="submit" class="btn btn-success w-100 fs-5 mt-4">Cadastrar-se</button>
-</form>
+    {% if redirect_field_value %}
+    <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+    {% endif %}
+    <button type="submit" class="btn btn-success w-100 fs-5 mt-4">Cadastrar-se</button>
+  </form>
+
+</div>
+
 {% endblock %}

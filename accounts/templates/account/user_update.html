@@ -4,64 +4,97 @@
 {% block head_title %}Atualizar Perfil{% endblock %}
 
 {% block content %}
-<h1 class="fw-bold">Atualizar Dados</h1>
 
-<form method="post">
-    {% csrf_token %}
+<form method="post" class="col-12 mb-2">
 
-    <div class="input-group mb-3">
-        <span class="input-group-text" id="basic-addon1">@</span>
-        <div class="form-floating flex-grow-1">
-            {{ form.username.errors|safe }}
-            {% render_field form.username placeholder=form.username.label id=form.username.id name=form.username.name type=form.username.field.widget.input_type autocomplete=form.username.name required=True class="form-control" aria-describedby="basic-addon1" %}
-            <label for="{{ form.username.id_for_label }}" class="floatingInput">{{ form.username.label }}</label>
-        </div>
-    </div>
+  <h1 class="fw-bold">Atualizar Dados</h1>
 
-    <div class="input-group">
-        <div class="form-floating flex-grow-1">
-            {{ form.first_name.errors|safe }}
-            {% render_field form.first_name placeholder=form.first_name.label id=form.first_name.id name=form.first_name.name type=form.first_name.field.widget.input_type autocomplete=form.first_name.name required=True class="form-control mb-2" %}
-            <label for="{{ form.first_name.id_for_label }}" class="floatingInput">{{ form.first_name.label }}</label>
-        </div>
+  {% csrf_token %}
 
-        <div class="form-floating flex-grow-1">
-            {{ form.middle_name.errors|safe }}
-            {% render_field form.middle_name placeholder=form.middle_name.label id=form.middle_name.id name=form.middle_name.name type=form.middle_name.field.widget.input_type autocomplete=form.middle_name.name required=True class="form-control mb-2" %}
-            <label for="{{ form.middle_name.id_for_label }}" class="floatingInput">{{ form.middle_name.label }}</label>
-        </div>
-
-        <div class="form-floating flex-grow-1">
-            {{ form.last_name.errors|safe }}
-            {% render_field form.last_name placeholder=form.last_name.label id=form.last_name.id name=form.last_name.name type=form.last_name.field.widget.input_type autocomplete=form.last_name.name required=True class="form-control mb-2" %}
-            <label for="{{ form.last_name.id_for_label }}" class="floatingInput">{{ form.last_name.label }}</label>
-        </div>
-    </div>
-
+  {{ form.non_field_errors|safe }}
+  <input type="hidden" name="remember" value="true" />
+  <div class="input-group mb-3">
+    <span class="input-group-text" id="addon-wrapping">@</span>
     <div class="form-floating">
-        {{ form.birthdate.errors|safe }}
-        {% render_field form.birthdate placeholder=form.birthdate.label id='id_birthdate' name=form.birthdate.name autocomplete=form.birthdate.name class="form-control mb-2" type='date' %}
-        <label for="{{ form.birthdate.id_for_label }}" class="floatingInput">{{ form.birthdate.label }}</label>
+      {{ form.username.errors|safe }}
+      {% render_field form.username placeholder="username" id="username" name="username" type="text" autocomplete="username" required=True class="form-control" %}
+      <label for="username" class="floatingInput">Nome de Usuário</label>
     </div>
-    
-    {% for field in form %}
-        {% if field.name not in 'username, first_name, middle_name, last_name, birthdate' %}
-            <div class="form-floating">
-                {{ field.errors|safe }}
-                {% render_field field placeholder=field.label id=field.id name=field.name type=field.field.widget.input_type autocomplete=field.name required=True class="form-control mb-2" %}
-                <label for="{{ field.id_for_label }}" class="floatingInput">{{ field.label }}</label>
-            </div>
-        {% endif %}
-    {% endfor %}
-    <button type="submit" class="btn btn-success w-100 fs-5 mt-4">Salvar</button>
+  </div>
+  <div class="input-group input-group-w-100 flex-column flex-md-row mb-3">
+    <span class="input-group-text input-group-text-w-100 justify-content-center" id="addon-wrapping">
+      <i class="bi bi-person"></i>
+    </span>
+    <div class="form-floating form-floating-w-100">
+      {{ form.first_name.errors|safe }}
+      {% render_field form.first_name placeholder="Primeiro nome" id="first_name" name="first_name" type="text" autocomplete="first_name" required=True class="form-control" %}
+      <label for="first_name" class="floatingInput">Primeiro nome</label>
+    </div>
+    <div class="form-floating form-floating-w-100">
+      {{ form.middle_name.errors|safe }}
+      {% render_field form.middle_name placeholder="Nome do meio" id="middle_name" name="middle_name" type="text" autocomplete="middle_name" required=True class="form-control" %}
+      <label for="middle_name" class="floatingInput">Nome do meio</label>
+    </div>
+    <div class="form-floating form-floating-w-100">
+      {{ form.last_name.errors|safe }}
+      {% render_field form.last_name placeholder="Último nome" id="last_name" name="last_name" type="text" autocomplete="last_name" required=True class="form-control" %}
+      <label for="last_name" class="floatingInput">Último nome</label>
+    </div>
+  </div>
+
+  <div class="input-group mb-3">
+    <span class="input-group-text" id="addon-wrapping">
+      <i class="bi bi-envelope"></i>
+    </span>
+    <div class="form-floating">
+      {{ form.email.errors|safe }}
+      {% render_field form.email placeholder="email" id="email" name="email" type="email" autocomplete="email" required=True class="form-control" %}
+      <label for="id_email" class="floatingInput">E-mail</label>
+    </div>
+  </div>
+
+  <div class="input-group mb-3">
+    <span class="input-group-text" id="addon-wrapping">
+      <i class="bi bi-calendar"></i>
+    </span>
+    <div class="form-floating">
+      {{ form.birthdate.errors|safe }}
+      {% render_field form.birthdate placeholder=form.birthdate.label id='id_birthdate' name=form.birthdate.name autocomplete=form.birthdate.name class="form-control" type='date' %}
+      <label for="{{ form.birthdate.id_for_label }}" class="floatingInput">{{ form.birthdate.label }}</label>
+    </div>
+  </div>
+
+  <div class="input-group mb-3">
+    <span class="input-group-text" id="addon-wrapping">
+      <i class="bi bi-gender-ambiguous"></i>
+    </span>
+    <div class="form-floating">
+      {{ form.gender.errors|safe }}
+      {% render_field form.gender placeholder="gender" id="id_gender" name="gender" autocomplete="gender" class="form-control" %}
+      <label for="id_gender" class="floatingInput">Gênero</label>
+    </div>
+  </div>
+
+  <a href="{% url 'account_change_password' %}">Deseja mudar sua senha?</a>
+
+
+
+  {% if redirect_field_value %}
+  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+  {% endif %}
+  <button type="submit" class="btn btn-success w-100 fs-5 mt-4">Salvar</button>
 </form>
+
+<div class="col-12">
+  <a class="btn btn-secondary" href="{% url 'main:my-profile' %}" role="button">Voltar</a>
+</div>
 {% endblock %}
 
 {% block extra_body %}
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        var formattedDate = "{{ form.birthdate.value|date:'Y-m-d' }}";
-        document.getElementById('id_birthdate').value = formattedDate;
-    });
+  document.addEventListener('DOMContentLoaded', function () {
+    var formattedDate = "{{ form.birthdate.value|date:'Y-m-d' }}";
+    document.getElementById('id_birthdate').value = formattedDate;
+  });
 </script>
 {% endblock extra_body %}

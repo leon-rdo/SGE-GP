@@ -48,6 +48,10 @@ INSTALLED_APPS = [
     'widget_tweaks',
 ]
 
+ACCOUNT_FORMS = {
+    "signup": "accounts.forms.UserRegisterForm",
+}
+
 AUTHENTICATION_BACKENDS = (
     'allauth.account.auth_backends.AuthenticationBackend',
 )

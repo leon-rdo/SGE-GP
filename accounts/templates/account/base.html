@@ -15,11 +15,9 @@
     <title>
       {% block head_title %}{% endblock %} | SGE-GP
     </title>
-    {% block extra_head %}
-
-    {% endblock %}
+    {% block extra_head %}{% endblock %}
   </head>
-  <body class="container-fluid p-0 overflow-hidden">
+  <body class="container-fluid p-0 overflow-x-hidden">
     {% for message in messages %}
       <div class="alert bg-warning alert-dismissible fade show border-0 rounded-0 m-0" role="alert">
         <strong>Mensagem:</strong> {{ message }}
@@ -36,10 +34,10 @@
         </div>
       </div>
 
-      <div class="col-12 col-md-5 d-flex align-content-center justify-content-center">
+      <div class="col-12 col-md-5">
         {% block body %}
 
-          <div class="w-100 px-1 px-md-4 px-sm-5 d-flex flex-column align-content-center justify-content-center">
+          <div class="row px-3 align-content-center justify-content-center">
             {% block content %}
 
             {% endblock %}
