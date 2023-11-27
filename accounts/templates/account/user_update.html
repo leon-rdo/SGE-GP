@@ -47,9 +47,9 @@
       <i class="bi bi-person-vcard"></i>
     </span>
     <div class="form-floating">
-      {{ form.code.errors|safe }}
-      {% render_field form.code placeholder="code" id="id_code" name="code" autocomplete="code" class="form-control" required=True readonly %}
-      <label for="id_code" class="floatingInput">Matrícula</label>
+      <input type="text" class="form-control" readonly value="{{ user.code }}">
+      <label for="id_code" class="floatingInput">Matrícula <small class="text-secondary">(Não editável)</small>
+      </label>
     </div>
   </div>
 
