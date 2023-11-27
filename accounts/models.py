@@ -40,8 +40,3 @@ class User(AbstractUser):
         verbose_name = 'Usuário'
         verbose_name_plural = 'Usuários'
         ordering = ['username']
-    
-    '''
-    def get_absolute_url(self):
-        return reverse('main:profile', args=[self.username])
-    '''
