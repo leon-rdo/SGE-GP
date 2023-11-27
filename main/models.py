@@ -77,9 +77,9 @@ class Classroom(models.Model):
     class_diary = models.TextField("Diário de Classe")
     
     def get_absent_students(self):
-        all_students = self.class_code.students.all()
-        present_students = self.attendance_list.all()
-        absent_students = all_students.difference(present_students)
+        all_students = set(self.class_code.enrolled.all())
+        present_students = set(self.attendance_list.all())
+        absent_students = all_students - present_students
         return absent_students
 
     class Meta:
