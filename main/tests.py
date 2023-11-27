@@ -4,9 +4,10 @@ from django.test import TestCase, Client
 from django.urls import reverse
 from django.contrib.auth import get_user_model
 from django.core.files.uploadedfile import SimpleUploadedFile
+
 from accounts.models import User
 from .models import Subject, Classroom, Test, Grade, Event, Class, Activity
-
+from .forms import ClassroomForm, TestForm, GradeForm
 
 
 User = get_user_model()
@@ -52,6 +53,73 @@ class ClassroomModelTest(TestCase):
         # Verifica se a lista de alunos ausentes retornada pelo método é igual à esperada
         self.assertEqual(self.classroom.get_absent_students(), {self.student2})
         
+
+class TestForms(TestCase):
+    def setUp(self):
+        # Configuração inicial do teste. É executado antes de cada método de teste.
+        # Cria um usuário professor para os testes
+        self.teacher = User.objects.create_user(username='testteacher', password='12345', type='teacher')
+        # Cria uma matéria para os testes
+        self.subject = Subject.objects.create(name='Math', teacher=self.teacher, class_code=Class.objects.create(code='1A', academic_year='2022'), slug='required-slug')
+        # Cria alguns alunos para os testes
+        self.student1 = User.objects.create_user(username='student1', password='12345', type='student')
+        self.student2 = User.objects.create_user(username='student2', password='12345', type='student')
+        # Cria um teste escolar para os testes
+        self.test = Test.objects.create(school_test='1', subject=self.subject, class_code=self.subject.class_code, date=datetime.now())
+        
+    def test_classroom_form_valid_data(self):
+        # Testa o formulário ClassroomForm com dados válidos
+
+        # Cria um formulário ClassroomForm com dados válidos
+        form = ClassroomForm(data={
+            'subject': self.subject.id,
+            'date': '2022-01-01',
+            'attendance_list': [self.student1.id, self.student2.id],  # Use a lista de IDs de alunos
+            'class_diary': 'Math class',
+        }, user=self.teacher)
+
+        # Se o formulário não for válido, imprime os erros
+        if not form.is_valid():
+            print(form.errors)
+
+        # Verifica se o formulário é válido
+        self.assertTrue(form.is_valid())
+
+    def test_test_form_valid_data(self):
+        # Testa o formulário TestForm com dados válidos
+
+        # Cria um formulário TestForm com dados válidos
+        form = TestForm(data={
+            'school_test': self.test.school_test,  # Use o valor de school_test do teste criado
+            'subject': self.subject.id,
+            'class_code': self.subject.class_code.id,  # Use a instância do modelo Class
+            'date': '2022-01-01',
+        }, user=self.teacher)
+
+        # Se o formulário não for válido, imprime os erros
+        if not form.is_valid():
+            print(form.errors)
+
+        # Verifica se o formulário é válido
+        self.assertTrue(form.is_valid())
+        
+    def test_grade_form_valid_data(self):
+        # Testa o formulário GradeForm com dados válidos
+
+        # Cria um formulário GradeForm com dados válidos
+        form = GradeForm(data={
+            'grade': 10,
+        })
+
+        # Verifica se o formulário é válido
+        self.assertTrue(form.is_valid())
+
+    def tearDown(self):
+        # Limpeza após o teste. É executado após cada método de teste.
+        # Deleta o usuário professor e a matéria criados no setUp
+        self.teacher.delete()
+        self.subject.delete()
+
 
 class TestViews(TestCase):
     # Método que é executado antes de cada teste
