@@ -97,7 +97,6 @@ class LancarAulaView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
         messages.success(self.request, "Aula lançada com sucesso!")
         return super().form_valid(form)
     
-    
     def form_invalid(self, form):
         print(form.errors)
         messages.error(self.request, "Erro ao lançar aula.")
