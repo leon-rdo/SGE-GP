@@ -1,4 +1,5 @@
 from datetime import date
+import datetime
 
 from django.contrib.auth import get_user_model
 from django.test import TestCase, Client
@@ -119,9 +120,9 @@ class TestUserModel(TestCase):
     def test_age(self):
         # Testa o método age do modelo User
 
-        # Assume que o ano atual é 2022
+        # Assume que o ano atual é 2023
         # Verifica se o método age retorna a idade correta
-        self.assertEqual(self.user.age(), 22)
+        self.assertEqual(self.user.age(), datetime.date.today().year - 2000)
 
     def test_str(self):
         # Testa o método __str__ do modelo User
