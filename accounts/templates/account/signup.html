@@ -64,7 +64,18 @@
           <label for="last_name" class="floatingInput">Último nome</label>
         </div>
       </div>
-      
+
+      <div class="input-group mb-3">
+        <span class="input-group-text" id="addon-wrapping">
+          <i class="bi bi-person-vcard"></i>
+        </span>
+        <div class="form-floating">
+          {{ form.code.errors|safe }}
+          {% render_field form.code placeholder="code" id="id_code" name="code" autocomplete="code" class="form-control" required=True %}
+          <label for="id_code" class="floatingInput">Matrícula</label>
+        </div>
+      </div>
+
       <div class="input-group mb-3">
         <span class="input-group-text" id="addon-wrapping">
           <i class="bi bi-envelope"></i>
