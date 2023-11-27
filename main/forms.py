@@ -5,13 +5,12 @@ from .models import Classroom, Subject, Test, Grade
 class ClassroomForm(forms.ModelForm):
     class Meta:
         model = Classroom
-        fields = ["subject", "class_code", "date", "attendance_list", "class_diary"]
+        fields = ["subject", "date", "attendance_list", "class_diary"]
         widgets = {
             "date": forms.DateInput(attrs={"type": "date"}),
         }
         labels = {
             "subject": "Disciplina",
-            "class_code": "Turma",
             "date": "Data",
             "attendance_list": "Lista de presença",
             "class_diary": "Diário de Classe",
@@ -22,6 +21,14 @@ class ClassroomForm(forms.ModelForm):
         super(ClassroomForm, self).__init__(*args, **kwargs)
         if user is not None and user.type == "teacher":
             self.fields["subject"].queryset = Subject.objects.filter(teacher=user)
+
+    def save(self, commit=True):
+        instance = super().save(commit=False)
+        instance.class_code = instance.subject.class_code
+        if commit:
+            instance.save()
+            self.save_m2m()
+        return instance
 
 
 class TestForm(forms.ModelForm):

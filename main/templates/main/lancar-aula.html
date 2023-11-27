@@ -20,13 +20,28 @@
 {% endblock head %}
 
 {% block aside %}
-{% include "main/snippets/aside.html" %}
+  {% include "main/snippets/aside.html" %}
 {% endblock aside %}
 
 {% block content %}
 <div class="col-12 col-md-9">
   <h1>Lançar Aula</h1>
   <form method="post" class="row mt-3">
+    {% if form.errors %}
+    <div class="col-12">
+    <div class="alert alert-danger alert-dismissible fade show">
+      {% for field in form %}
+        {% for error in field.errors %}
+          <strong>{{ field.label }}:</strong> {{ error|escape }}
+        {% endfor %}
+      {% endfor %}
+      {% for error in form.non_field_errors %}
+        <strong>Non-field error:</strong> {{ error|escape }}
+      {% endfor %}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    </div>
+    {% endif %}
     {% csrf_token %}
     {% load widget_tweaks %}
     <div class="col-12 col-md-6">
@@ -80,7 +95,10 @@ $(document).ready(function() {
   $('#id_subject').change(function() {
     var subjectId = $(this).val();
 
-    $("#id_attendance_list").html(select_subject);
+    if (!subjectId) {
+      $("#id_attendance_list").html(select_subject);
+      return;
+    }
 
     $.ajax({
       url: "{% url 'main:get_students_for_subject' %}",

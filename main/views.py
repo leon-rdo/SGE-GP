@@ -78,7 +78,7 @@ class DesempenhoView(LoginRequiredMixin, UserPassesTestMixin, DetailView):
 def get_students_for_subject(request):
     subject = Subject.objects.get(id=request.GET.get('subject', None))
     students = subject.class_code.enrolled.all() | subject.academic_probation.all()
-    student_list = [{'id': student.id, 'name': str(student)} for student in students]
+    student_list = [{'id': int(student.id), 'name': str(student)} for student in students]
     return JsonResponse(student_list, safe=False)
 
 
@@ -92,6 +92,16 @@ class LancarAulaView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
         kwargs = super(LancarAulaView, self).get_form_kwargs()
         kwargs.update({'user': self.request.user})
         return kwargs
+    
+    def form_valid(self, form):
+        messages.success(self.request, "Aula lançada com sucesso!")
+        return super().form_valid(form)
+    
+    
+    def form_invalid(self, form):
+        print(form.errors)
+        messages.error(self.request, "Erro ao lançar aula.")
+        return super().form_invalid(form)
     
     def test_func(self):    
         return self.request.user.type == "teacher" or self.request.user.type == "coordinator"
